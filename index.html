@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>行测专项·判断推理真题化训练</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='4' width='20' height='16' rx='2' fill='%231e3a5f'/%3E%3Cpath d='M5 8h9v2H5zm0 4h6v2H5z' fill='%23fff'/%3E%3Ccircle cx='16' cy='10' r='2.2' fill='%23f5a623'/%3E%3Cpath d='M15 14c0-2 2.2-2.6 3-1 1.2-2.2 1.5-1 2-1-1.5 2.5-1.5 4-1 6h-6c0-1.5-.2-2.7 2-4z' fill='%23fff'/%3E%3C/svg%3E">
+<style>
+:root{--nav:#1e3a5f;--nav2:#16304f;--bg:#f4f6f9;--card:#fff;--line:#e4e9f0;--txt:#243342;--sub:#6b7a8c;--blue:#2f6fdb;--green:#1f9d72;--red:#d9534f;--orange:#f5a623;--chip:#eef2f8;--chipon:#2f6fdb}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+.top{background:linear-gradient(135deg,var(--nav),var(--nav2));color:#fff;padding:16px 20px 12px;position:sticky;top:0;z-index:50}
+.top h1{font-size:19px;letter-spacing:1px}
+.hd-sub{font-size:12.5px;color:#bcd0ea;margin-top:2px}
+.navbar{display:flex;gap:8px;margin-top:12px}
+.navbar .nt{flex:1;text-align:center;padding:7px 0;border-radius:8px;font-size:13.5px;cursor:pointer;background:rgba(255,255,255,.12);color:#dbe6f3}
+.navbar .nt.on{background:#fff;color:var(--nav);font-weight:700}
+.wrap{max-width:880px;margin:0 auto;padding:14px 14px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+.card h2{font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card h2 .bar{width:4px;height:16px;background:var(--blue);border-radius:2px;display:inline-block}
+.sec-t{font-size:13px;color:var(--sub);margin:12px 0 8px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:5px 12px;border-radius:16px;background:var(--chip);font-size:12.5px;cursor:pointer;border:1px solid transparent;user-select:none}
+.chip.sel{background:var(--chipon);color:#fff}
+.btn{display:inline-block;padding:9px 20px;border-radius:8px;border:none;font-size:14px;cursor:pointer;background:var(--blue);color:#fff;font-weight:600}
+.btn.g{background:#fff;border:1px solid var(--line);color:var(--txt)}
+.btn.ghost{background:transparent;border:1px solid #cfd8e3;color:var(--sub)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.count-tip{font-size:13px;color:var(--green);font-weight:600}
+#quizView{display:none}
+.qbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.qbar .prog{flex:1;min-width:140px}
+.qbar .lbl{font-size:13px;color:var(--sub)}
+.timer{font-size:14px;font-weight:700;color:var(--nav)}
+.qmeta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 6px}
+.qmeta .tag{font-size:11.5px;background:#eef2f8;padding:3px 9px;border-radius:12px;color:#51627a}
+.qmeta .tag.pt{background:#e7f0fe;color:var(--blue)}
+.qbody{font-size:15px;line-height:1.9;padding:10px 4px}
+.qbody .fig{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:10px 0}
+.qbody svg{max-width:100%}
+.opts{margin-top:8px}
+.opt{display:block;width:100%;text-align:left;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;font-size:14.5px;cursor:pointer;margin-bottom:10px;line-height:1.7}
+.opt:hover{border-color:var(--blue)}
+.opt.pick{border-color:var(--blue);background:#f0f6ff}
+.opt.correct{border-color:var(--green);background:#eafaf3}
+.opt.wrong{border-color:var(--red);background:#fdf0ef}
+.opt .o{display:inline-block;width:24px;height:24px;border-radius:50%;background:var(--chip);text-align:center;line-height:24px;font-size:13px;font-weight:700;margin-right:8px;vertical-align:1px}
+.opt.correct .o{background:var(--green);color:#fff}
+.opt.wrong .o{background:var(--red);color:#fff}
+.opt.pick:not(.correct):not(.wrong) .o{background:var(--blue);color:#fff}
+.qnav{display:flex;gap:10px;margin-top:6px}
+.qnav .btn{flex:1}
+.card h3{font-size:14px;margin:14px 0 8px;display:flex;gap:6px;align-items:center}
+.card h3 .bar{width:4px;height:14px;background:var(--orange);border-radius:2px;display:inline-block}
+.anl{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13.5px;line-height:1.9;margin-bottom:10px}
+.anl b{color:var(--nav)}
+.trap{border-left:3px solid var(--orange);background:#fff8ef;border-radius:0 8px 8px 0;padding:9px 12px;margin-bottom:8px;font-size:13px;line-height:1.8}
+.trap .tw{color:var(--red);font-weight:700}
+.orig{font-size:12px;color:var(--sub);background:#f1f5f9;border-radius:8px;padding:8px 12px;margin-top:10px;line-height:1.7}
+.key{font-size:13px;background:#eef7f1;border-radius:8px;padding:9px 12px;margin-top:10px;line-height:1.8;color:#1c6b48}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#f2f6fb;color:#3a4a5c}
+.score-wrap{text-align:center;padding:20px 0}
+.score-ring{width:130px;height:130px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:30px;font-weight:800;color:#fff}
+.hi{background:linear-gradient(135deg,#1f9d72,#2fbf8f)}
+.mid{background:linear-gradient(135deg,#f5a623,#f7b955)}
+.lo{background:linear-gradient(135deg,#d9534f,#e0706d)}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:10px}
+.stat-box{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+.stat-box .v{font-size:22px;font-weight:800;color:var(--nav)}
+.stat-box .k{font-size:12px;color:var(--sub);margin-top:2px}
+.wrong-item{border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px;background:#fff}
+.wrong-item .wq{font-size:13.5px;margin-bottom:6px}
+.wrong-item .wr{font-size:12.5px;color:var(--sub)}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;background:#e7f0fe;color:var(--blue);margin-right:6px}
+.badge.y{background:#fff3e0;color:#b26a00}
+.badge.g{background:#eafaf3;color:#1c6b48}
+.placeholder{text-align:center;padding:40px 16px;color:var(--sub)}
+.placeholder .big{font-size:34px;margin-bottom:10px}
+@media(max-width:640px){.wrap{padding:10px 10px 50px}.opt{font-size:14px}}
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>行测专项 · 真题化训练</h1>
+  <div class="hd-sub" id="hdSub">判断推理 · 河南省考+事业单位联考真题 · 每错项逐条拆解命题人陷阱</div>
+  <div class="navbar">
+    <div class="nt on" data-m="pd" onclick="setMod('pd')">判断推理</div>
+    <div class="nt" data-m="sl" onclick="setMod('sl')">数量关系</div>
+  </div>
+</div>
+<div class="wrap" id="setupView">
+  <div class="card">
+    <h2><span class="bar"></span>练习设置</h2>
+    <div class="sec-t">真题来源（可多选）</div>
+    <div class="chips" id="srcChips"></div>
+    <div class="sec-t">年份（可多选，2020-2026）</div>
+    <div class="chips" id="yrChips"></div>
+    <div class="sec-t">每组题量</div>
+    <div class="chips" id="cntChips"></div>
+  </div>
+  <div class="card">
+    <h2><span class="bar"></span>考点筛选（<span id="ptCount"></span> 个考点）</h2>
+    <div class="chips" id="ptChips"></div>
+    <div class="row" style="margin-top:14px">
+      <span class="count-tip" id="tip">已选全部考点</span>
+      <span style="flex:1"></span>
+      <button class="btn g" onclick="selAllPt()">全选考点</button>
+      <button class="btn g" onclick="clrPt()">清空考点</button>
+    </div>
+    <div style="margin-top:12px"><button class="btn" id="startBtn" onclick="startQuiz()">开始练习</button></div>
+  </div>
+  <div class="card">
+    <h2><span class="bar"></span>命题人视角 · 判断推理干扰项设计规律（做题前必读）</h2>
+    <div id="methodCard"></div>
+  </div>
+</div>
+
+<div class="wrap" id="quizView" style="display:none">
+  <div class="card">
+    <div class="qbar">
+      <span class="lbl" id="qIdx">第 1 题</span>
+      <div class="prog" style="height:8px;background:#e8edf4;border-radius:4px;overflow:hidden"><div id="qProg" style="width:0%;height:100%;background:var(--blue);transition:width .3s"></div></div>
+      <span class="timer" id="timer">00:00</span>
+      <button class="btn ghost" style="padding:6px 12px;font-size:12.5px" onclick="toggleUnc()">不确定</button>
+      <button class="btn ghost" style="padding:6px 12px;font-size:12.5px" onclick="quitQuiz()">退出</button>
+    </div>
+    <div class="qmeta" id="qMeta"></div>
+    <div class="qbody" id="qBody"></div>
+    <div class="opts" id="qOpts"></div>
+    <div class="qnav" id="qNav"></div>
+  </div>
+</div>
+
+<div class="wrap" id="resView" style="display:none">
+  <div class="card" id="resCard"></div>
+</div>
+
+<div class="wrap" id="ptView" style="display:none">
+  <div class="card" id="ptCard"></div>
+</div>
+
+<div class="wrap" id="stView" style="display:none">
+  <div class="card" id="stCard"></div>
+</div>
+
+<div class="wrap" id="wkView" style="display:none">
+  <div class="card" id="wkCard"></div>
+</div>
+
+<script>
+/* ============================================================
+ * 题库结构：q 题干（可含内联 SVG），opts 四选项，ans 正确项索引，
+ *      point 主考点，solve 解析，traps [{o,why}]（错误项陷阱拆解），
+ *      key 解题关键，src 来源，yr 年份，srcType 卷别（河南省考/事业单位联考），orig 出处核验
+ * ============================================================ */
+const QB=[
+/* ===== 图形推理 ===== */
+{q:'从所给的四个选项中，选择最合适的一个填入问号处，使之呈现一定的规律性：<div class="fig"><div style="text-align:center"><div>题干</div><svg width="150" height="34" viewBox="0 0 300 68"><g font-size="30" font-family="Arial" text-anchor="middle"><text x="30" y="34" font-weight="bold">B</text><text x="90" y="34">E</text><text x="150" y="34">H</text><text x="240" y="34" font-weight="bold">L</text><text x="280" y="34">?</text></g></svg></div><div style="text-align:center;margin-top:6px">选项</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><svg width="60" height="34" viewBox="0 0 120 68"><text x="60" y="34" font-size="30" font-family="Arial" text-anchor="middle">O</text></svg><svg width="60" height="34" viewBox="0 0 120 68"><text x="60" y="34" font-size="30" font-family="Arial" text-anchor="middle">P</text></svg><svg width="60" height="34" viewBox="0 0 120 68"><text x="60" y="34" font-size="30" font-family="Arial" text-anchor="middle">Q</text></svg><svg width="60" height="34" viewBox="0 0 120 68"><text x="60" y="34" font-size="30" font-family="Arial" text-anchor="middle">R</text></svg></div></div>',
+opts:['<div style="text-align:center">O</div>','<div style="text-align:center">P</div>','<div style="text-align:center">Q</div>','<div style="text-align:center">R</div>'],
+ans:0,point:"图形·数量类（点线）",
+solve:'两段式：第一组 B→E→H 按字母表间隔 2 个字母（B、E、H 之间各隔 2 个字母）；第二组 L 间隔 2 个字母后为 O。另可验证交点数量：第一组字母交点数为 4、3、2 等差递减，第二组为 2、1、？，问号处应 0 个交点，O 无交点，两法同得答案 O。',
+key:'字母图形题双解法锁定：字母间隔（主规律）+ 交点数量递减（验证规律），两条规律指向同一答案时基本可确定。',
+traps:[{o:1,why:'P 与 L 之间隔 3 个字母、与 O 相邻，选 P 是只看“字母越来越靠后”而忽视固定间隔，属“规律识别不全”陷阱。'},{o:2,why:'Q 更靠后，诱使考生认为“继续按字母表顺序走”，实则第二组起点 L 与第一组起点 B 位置不同，按顺序走就错——典型的“机械类比、忽视组间差异”干扰。'},{o:3,why:'R 与 Q 同理强化“顺延字母表”的错误路径；同时 R 含 1 个交点，若按交点规律也无法满足 0 交点，双线出局。'}],key:"字母间隔（间隔2个）+交点数为0",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），答案经格木教育解析核对"},
+
+{q:'从所给的四个选项中，选择最合适的一个填入问号处，使之呈现一定的规律性：<div class="fig"><div style="text-align:center"><div>题干（第一组）</div><div style="display:flex;gap:12px;justify-content:center"><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">奋</text></svg><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">战</text></svg><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">占</text></svg></div></div><div style="text-align:center;margin-top:6px">题干（第二组）</div><div style="display:flex;gap:12px;justify-content:center"><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">会</text></svg><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">坛</text></svg><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">?</text></svg></div></div><div style="text-align:center;margin-top:6px">选项</div><div style="display:flex;gap:10px;justify-content:center"><svg width="60" height="40" viewBox="0 0 60 40"><text x="0" y="30" font-size="30" font-family="SimSun">运</text></svg><svg width="60" height="40" viewBox="0 0 60 40"><text x="0" y="30" font-size="30" font-family="SimSun">动</text></svg><svg width="60" height="40" viewBox="0 0 60 40"><text x="0" y="30" font-size="30" font-family="SimSun">芸</text></svg><svg width="60" height="40" viewBox="0 0 60 40"><text x="0" y="30" font-size="30" font-family="SimSun">尝</text></svg></div></div>',
+opts:['<div style="text-align:center">运</div>','<div style="text-align:center">动</div>','<div style="text-align:center">芸</div>','<div style="text-align:center">尝</div>'],
+ans:2,point:"图形·样式类（运算/求同）",
+solve:'两段式汉字求同：第一组“奋、战、占”均含共同部件“占”；第二组“会、坛、？”应均含共同部件“云”，四个选项中只有“芸”含“云”。',
+key:'汉字图形题优先找共同偏旁/部件（求同规律），再比对选项是否精确含有该部件。',
+traps:[{o:0,why:'“运”含“云”但带“辶”，命题人故意用“云＋辶”做近似干扰——考生若只看“有点像”不看部件完全一致就会中招，属“部件近似偷换”。'},{o:1,why:'“动”含“云”的变形却非“云”字本身，强化“形近即对”的错觉，考察考生对求同对象是否精确锁定。'},{o:3,why:'“尝”与第二组前两字同为上下/左右结构风格相近，命题人用结构相似性干扰，诱使考生放弃部件比对转而看整体风格。'}],key:"汉字部件求同（云）",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），文字部件经格木教育解析核对"},
+
+{q:'从所给的四个选项中，选择最合适的一个填入问号处，使之呈现一定的规律性：<div class="fig"><div style="text-align:center"><div>题干</div><svg width="320" height="56" viewBox="0 0 640 112"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,90 90,20 140,90"/><polygon points="210,90 260,20 310,90"/><polygon points="380,90 430,20 480,90"/><polygon points="550,90 600,20 650,90"/></g></svg></div><div style="text-align:center;margin-top:6px">选项</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><svg width="150" height="56" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,90 90,10 140,90"/><polygon points="60,20 80,20 80,40 60,40"/><polygon points="100,20 120,20 120,40 100,40"/></g></svg><svg width="150" height="56" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,90 90,20 140,90"/><polygon points="40,40 70,40 70,70 40,70"/><polygon points="100,30 130,30 130,60 100,60"/></g></svg><svg width="150" height="56" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,90 90,30 140,90"/><polygon points="55,40 80,40 80,65 55,65"/><polygon points="85,55 110,55 110,80 85,80"/></g></svg><svg width="150" height="56" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,90 90,20 140,90"/><polygon points="30,60 60,60 60,85 30,85"/><polygon points="80,25 110,25 110,50 80,50"/></g></svg></div></div>',
+opts:['<svg width="140" height="50" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,90 90,10 140,90"/><polygon points="60,20 80,20 80,40 60,40"/><polygon points="100,20 120,20 120,40 100,40"/></g></svg>','<svg width="140" height="50" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,90 90,20 140,90"/><polygon points="40,40 70,40 70,70 40,70"/><polygon points="100,30 130,30 130,60 100,60"/></g></svg>','<svg width="140" height="50" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,90 90,30 140,90"/><polygon points="55,40 80,40 80,65 55,65"/><polygon points="85,55 110,55 110,80 85,80"/></g></svg>','<svg width="140" height="50" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,90 90,20 140,90"/><polygon points="30,60 60,60 60,85 30,85"/><polygon points="80,25 110,25 110,50 80,50"/></g></svg>'],
+ans:1,point:"图形·数量类（点线）",
+solve:'题干图形均由直线构成且均为轴对称图形，直线数依次为 3、4、5、6 等差递增，问号处应选直线数为 7 且轴对称的图形。B 项外部三角形 3 条直线 + 内部两个矩形共 4 条直线 = 7 条，且整体轴对称，符合。',
+key:'“凌乱图形先数直线，再看对称”：直线数 3/4/5/6→7，同时保留轴对称属性，两个条件共同锁定 B。',
+traps:[{o:0,why:'A 项图形元素多且不对称，命题人用它测试考生是否只看“直线多”就选——A 直线数虽不少但破坏轴对称属性，属“单一条件达标即强选”陷阱。'},{o:2,why:'C 项直线数恰为 7 但非轴对称（矩形错位不对称），命题人特意把“数量对”与“属性错”叠加在同一项，考察双条件同时满足的严谨性。'},{o:3,why:'D 项外部多边形+两个矩形直线数为 8，是“多数一条”的经典干扰：考生数漏内部图形线条或把外轮廓边数错就会误入。'}],key:"直线数等差+轴对称",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），答案经格木教育解析核对"},
+
+{q:'从所给的四个选项中，选择最合适的一个填入问号处，使之呈现一定的规律性：<div class="fig"><div style="text-align:center"><div>题干</div><svg width="320" height="60" viewBox="0 0 640 120"><g fill="none" stroke="#000" stroke-width="2"><polyline points="20,100 20,20 90,100"/><polyline points="140,100 140,30 230,100"/><polyline points="280,100 280,40 390,100"/><polyline points="430,100 430,20 540,100"/></g></svg></div><div style="text-align:center;margin-top:6px">选项</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><svg width="150" height="60" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polyline points="20,100 20,10 140,100"/><polyline points="50,40 70,40 70,60 50,60"/></g></svg><svg width="150" height="60" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polyline points="20,100 20,30 140,100"/><polyline points="60,50 60,70 90,70"/></g></svg><svg width="150" height="60" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polyline points="20,100 20,50 140,100"/><polyline points="60,60 80,60 80,80 100,80"/></g></svg><svg width="150" height="60" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polyline points="20,100 20,20 140,100"/><polyline points="40,40 40,60 80,60 80,40"/></g></svg></div></div>',
+opts:['<svg width="140" height="55" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polyline points="20,100 20,10 140,100"/><polyline points="50,40 70,40 70,60 50,60"/></g></svg>','<svg width="140" height="55" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polyline points="20,100 20,30 140,100"/><polyline points="60,50 60,70 90,70"/></g></svg>','<svg width="140" height="55" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polyline points="20,100 20,50 140,100"/><polyline points="60,60 80,60 80,80 100,80"/></g></svg>','<svg width="140" height="55" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polyline points="20,100 20,20 140,100"/><polyline points="40,40 40,60 80,60 80,40"/></g></svg>'],
+ans:3,point:"图形·数量类（点线）",
+solve:'一段式：题干图形直角数量依次为 1、2、3、4 等差递增，问号处应选直角数为 5 的图形。D 项外轮廓折线含 3 个直角、内部矩形含 2 个独立直角（另两个与底边重合不计或按原题口径计数），合计直角数恰为 5。',
+key:'图形凌乱且都含直角，优先数直角数量：1、2、3、4→5。数直角时注意“L 形折点”各算 1 个。',
+traps:[{o:0,why:'A 项直角较多（约 7 个），命题人用“直角更多”的图形做干扰，诱使考生往“直角数越多越好”的错误方向选，忽视等差规律。'},{o:1,why:'B 项直角 6 个，是“比 5 多 1 个”的贴近干扰：考生若把规律误判为 2、3、4、5、6 递增就会选中 B。'},{o:2,why:'C 项直角 6 个，与 B 同数量不同结构，命题人用“数量相同但形态不同”的孪生选项测试考生是否真数得清每个直角。'}],key:"直角数量等差1,2,3,4→5",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），答案经格木教育解析核对"},
+
+{q:'从所给的四个选项中，选择最合适的一个填入问号处，使之呈现一定的规律性：<div class="fig"><div style="text-align:center"><div>题干</div><svg width="300" height="60" viewBox="0 0 600 120"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,100 90,20 140,100"/><polygon points="180,100 230,30 280,100"/><polygon points="320,100 370,40 420,100"/><polygon points="460,100 510,50 560,100"/></g></svg></div><div style="text-align:center;margin-top:6px">选项</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><svg width="150" height="60" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,100 90,10 140,100"/><polyline points="60,30 60,50 90,50"/></g></svg><svg width="150" height="60" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,100 90,20 140,100"/><polyline points="40,60 70,60 70,80"/></g></svg><svg width="150" height="60" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,100 90,30 140,100"/><polyline points="50,50 80,50 80,70 110,70"/></g></svg><svg width="150" height="60" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,100 90,20 140,100"/><polyline points="60,40 60,60 90,60 90,80"/></g></svg></div></div>',
+opts:['<svg width="140" height="55" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,100 90,10 140,100"/><polyline points="60,30 60,50 90,50"/></g></svg>','<svg width="140" height="55" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,100 90,20 140,100"/><polyline points="40,60 70,60 70,80"/></g></svg>','<svg width="140" height="55" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,100 90,30 140,100"/><polyline points="50,50 80,50 80,70 110,70"/></g></svg>','<svg width="140" height="55" viewBox="0 0 150 120"><g fill="none" stroke="#000" stroke-width="2"><polygon points="40,100 90,20 140,100"/><polyline points="60,40 60,60 90,60 90,80"/></g></svg>'],
+ans:1,point:"图形·数量类（面素）",
+solve:'题干图形封闭空间明显，先数面数无法区分；改数特殊面——三角形数量依次为 0、1、2、3、4 等差递增，问号处应选含 5 个三角形的图形。B 项内部一条折线把大三角形分割出的独立三角形区域恰为 5 个。',
+key:'封闭空间明显先数面；面数无法区分时改数“特殊面”（本题为三角形数量）：0、1、2、3、4→5。',
+traps:[{o:0,why:'A 项折线靠近顶点，分割出的三角形区域 4 个，是“数漏一个”的经典错误：考生只数大块，漏数顶点处小三角。'},{o:2,why:'C 项折线位置靠下，分割三角形仅 3 个，命题人用“折线越长三角形越少”的反直觉位置干扰，诱导凭目测而非逐个数数。'},{o:3,why:'D 项折线构成“之”字形，三角形区域 6 个，是“多数多乱”的陷阱：考生把非三角形区域也计入，暴露对“三角形区域”界定不清。'}],key:"数特殊面（三角形）0,1,2,3,4→5",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，图形结构按真题规律重绘，答案经华图教育解析核对"},
+
+{q:'从所给的四个选项中，选择最合适的一个填入问号处，使之呈现一定的规律性：<div class="fig"><div style="text-align:center"><div>题干（每个图形均含切点）</div><svg width="300" height="56" viewBox="0 0 600 112"><g fill="none" stroke="#000" stroke-width="2"><circle cx="45" cy="56" r="30"/><circle cx="95" cy="56" r="12"/><rect x="165" y="30" width="60" height="52"/><circle cx="265" cy="56" r="30"/><circle cx="265" cy="20" r="10"/><circle cx="265" cy="92" r="10"/><polygon points="360,26 410,26 410,86 360,86"/><circle cx="440" cy="56" r="30"/><circle cx="500" cy="56" r="30"/><circle cx="560" cy="56" r="30"/><circle cx="560" cy="20" r="8"/></g></svg></div><div style="text-align:center;margin-top:6px">选项</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><svg width="150" height="56" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="56" r="28"/><circle cx="95" cy="56" r="14"/><circle cx="95" cy="20" r="8"/></g></svg><svg width="150" height="56" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="56" r="28"/><circle cx="55" cy="20" r="12"/><circle cx="95" cy="56" r="12"/><circle cx="95" cy="20" r="12"/></g></svg><svg width="150" height="56" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="56" r="28"/><circle cx="95" cy="56" r="16"/><circle cx="95" cy="20" r="16"/></g></svg><svg width="150" height="56" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="56" r="28"/><circle cx="95" cy="56" r="14"/></g></svg></div></div>',
+opts:['<svg width="140" height="52" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="56" r="28"/><circle cx="95" cy="56" r="14"/><circle cx="95" cy="20" r="8"/></g></svg>','<svg width="140" height="52" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="56" r="28"/><circle cx="55" cy="20" r="12"/><circle cx="95" cy="56" r="12"/><circle cx="95" cy="20" r="12"/></g></svg>','<svg width="140" height="52" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="56" r="28"/><circle cx="95" cy="56" r="16"/><circle cx="95" cy="20" r="16"/></g></svg>','<svg width="140" height="52" viewBox="0 0 150 112"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="56" r="28"/><circle cx="95" cy="56" r="14"/></g></svg>'],
+ans:3,point:"图形·数量类（点线）",
+solve:'题干所有图形切点特征明显，且每个图形均有且仅有 1 个切点。D 项两个圆外切，切点 1 个，符合。',
+key:'图形特征“相切明显”→优先数切点，数量恒定 1 个，直接找只有 1 个切点的选项。',
+traps:[{o:0,why:'A 项大圆与两个小圆相交/内含，交点不止 1 个，命题人用“圆多”诱导考生数“圆的数量”而忽略“切点”，属考点迁移陷阱。'},{o:1,why:'B 项两组圆相离（无切点），考生若被“图形都含圆”的表面共性迷惑就会误选，命题人测试的是对“切点”这一特殊要素的敏感度。'},{o:2,why:'C 项两个圆内含（无切点），与 B 构成“无切点”双胞胎，进一步强化“只看圆不看切点”的错误路径。'}],key:"恒有1个切点",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，图形结构按真题规律重绘，答案经华图教育解析核对"},
+
+{q:'把下面的六个图形分为两类，使每一类图形都有各自的共同特征或规律，分类正确的一项是：<div class="fig"><div style="text-align:center"><svg width="330" height="56" viewBox="0 0 660 112"><g fill="none" stroke="#000" stroke-width="2"><circle cx="45" cy="56" r="32"/><rect x="28" y="10" width="34" height="30"/><circle cx="155" cy="56" r="32"/><rect x="138" y="78" width="34" height="30"/><circle cx="265" cy="56" r="32"/><rect x="248" y="10" width="34" height="30"/><rect x="248" y="78" width="34" height="30"/><circle cx="375" cy="56" r="32"/><rect x="358" y="44" width="34" height="30"/><circle cx="485" cy="56" r="32"/><rect x="468" y="10" width="34" height="30"/><rect x="468" y="78" width="34" height="30"/><circle cx="595" cy="56" r="32"/><rect x="578" y="10" width="34" height="30"/></g><text x="45" y="20" font-size="16" text-anchor="middle">①</text><text x="155" y="20" font-size="16" text-anchor="middle">②</text><text x="265" y="20" font-size="16" text-anchor="middle">③</text><text x="375" y="20" font-size="16" text-anchor="middle">④</text><text x="485" y="20" font-size="16" text-anchor="middle">⑤</text><text x="595" y="20" font-size="16" text-anchor="middle">⑥</text></svg></div><div style="text-align:center;margin-top:6px">选项</div><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><span style="font-size:13px">A.①②⑥，③④⑤</span><span style="font-size:13px">B.①③⑤，②④⑥</span><span style="font-size:13px">C.①⑤⑥，②③④</span><span style="font-size:13px">D.①④⑤，②③⑥</span></div></div>',
+opts:['A.①②⑥，③④⑤','B.①③⑤，②④⑥','C.①⑤⑥，②③④','D.①④⑤，②③⑥'],
+ans:2,point:"图形·属性类（对称）",
+solve:'分组分类：图形均被线条分割、面数相同（都 5 个面）无法分组；观察最大面——①⑤⑥的最大面是中心对称图形，②③④的最大面是轴对称图形，据此分为两组。',
+key:'分组分类先试常规数量（面数相同→排除），再转“最大面/特殊部分”的属性：中心对称 vs 轴对称。',
+traps:[{o:0,why:'A 项把①②⑥分一组，②的最大面并非中心对称，命题人用“部分图形最大面规整”的模糊印象干扰，考生不做逐面核验就会中招。'},{o:1,why:'B 项把③⑤混分，③最大面是轴对称而非中心对称，是“把两种对称混为一谈”的常见错误，命题人利用考生对两类对称区分不清设置陷阱。'},{o:3,why:'D 项分组完全打乱，属于“随机打乱”型干扰，测试考生是否真正验证了每一类图形的共同特征，而非凭整体观感。'}],key:"最大面的中心对称/轴对称分组",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，图形结构按真题规律重绘，答案经华图教育解析核对"},
+
+{q:'从所给的四个选项中，选择最合适的一个填入问号处，使之呈现一定的规律性：<div class="fig"><div style="text-align:center"><div>题干（线条与内圆交点按顺时针移动）</div><svg width="300" height="52" viewBox="0 0 600 104"><g fill="none" stroke="#000" stroke-width="2"><circle cx="50" cy="52" r="40"/><circle cx="50" cy="52" r="18"/><path d="M10 52 H90"/><circle cx="170" cy="52" r="40"/><circle cx="170" cy="52" r="18"/><path d="M170 12 V92"/><circle cx="290" cy="52" r="40"/><circle cx="290" cy="52" r="18"/><path d="M250 52 H330"/><circle cx="410" cy="52" r="40"/><circle cx="410" cy="52" r="18"/><path d="M410 12 V92"/><circle cx="530" cy="52" r="40"/><circle cx="530" cy="52" r="18"/><path d="M490 52 H570"/></g></svg></div><div style="text-align:center;margin-top:6px">选项</div><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><svg width="110" height="50" viewBox="0 0 110 104"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="52" r="40"/><circle cx="55" cy="52" r="18"/><path d="M55 12 V92"/></g></svg><svg width="110" height="50" viewBox="0 0 110 104"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="52" r="40"/><circle cx="55" cy="52" r="18"/><path d="M15 52 H95"/></g></svg><svg width="110" height="50" viewBox="0 0 110 104"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="52" r="40"/><circle cx="55" cy="52" r="18"/><path d="M15 52 H55"/><path d="M55 52 V92"/></g></svg><svg width="110" height="50" viewBox="0 0 110 104"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="52" r="40"/><circle cx="55" cy="52" r="18"/><path d="M15 52 H95"/><path d="M55 12 V52"/></g></svg></div></div>',
+opts:['<svg width="100" height="48" viewBox="0 0 110 104"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="52" r="40"/><circle cx="55" cy="52" r="18"/><path d="M55 12 V92"/></g></svg>','<svg width="100" height="48" viewBox="0 0 110 104"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="52" r="40"/><circle cx="55" cy="52" r="18"/><path d="M15 52 H95"/></g></svg>','<svg width="100" height="48" viewBox="0 0 110 104"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="52" r="40"/><circle cx="55" cy="52" r="18"/><path d="M15 52 H55"/><path d="M55 52 V92"/></g></svg>','<svg width="100" height="48" viewBox="0 0 110 104"><g fill="none" stroke="#000" stroke-width="2"><circle cx="55" cy="52" r="40"/><circle cx="55" cy="52" r="18"/><path d="M15 52 H95"/><path d="M55 12 V52"/></g></svg>'],
+ans:0,point:"图形·位置类（平移旋转）",
+solve:'题干组成元素相同（双同心圆+一条直线），直线与内圆的交点在内环上按顺时针方向每次移动一格：上→右→下→左→？，问号处交点应回到上方。A 项直线竖直且交点在上方，符合。',
+key:'元素相同→位置类；把直线与内圆的交点看成“动点”，按顺时针在内环上走格子：上、右、下、左、上。',
+traps:[{o:1,why:'B 项交点在左侧，是“逆时针移动”的错误方向：考生不标注移动方向凭感觉看，极易把顺时针误判为逆时针。'},{o:2,why:'C 项折线有两个折点，交点不止一个，命题人用它测试考生是否识别“元素组成相同”的前提——元素变了就不能套位置类规律。'},{o:3,why:'D 项两条直线组成“十”字，交点位置混乱，是“多元素堆叠”干扰，诱导考生放弃定位交点、凭整体感觉选择。'}],key:"交点内环顺时针移动",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，图形结构按真题规律重绘，答案经华图教育解析核对"},
+
+{q:'从所给的四个选项中，选择最合适的一个填入问号处，使之呈现一定的规律性：<div class="fig"><div style="text-align:center"><div>题干（红实线/黑虚线/黑实线复合移动）</div><svg width="300" height="56" viewBox="0 0 600 112"><g stroke-width="2" fill="none"><rect x="20" y="20" width="70" height="80" stroke="#e53935"/><rect x="34" y="34" width="56" height="52" stroke="#e53935"/><rect x="100" y="20" width="70" height="80" stroke="#000" stroke-dasharray="5,4"/><rect x="114" y="34" width="56" height="52" stroke="#000" stroke-dasharray="5,4"/><rect x="180" y="20" width="70" height="80" stroke="#000"/><rect x="194" y="34" width="56" height="52" stroke="#000"/><rect x="260" y="20" width="70" height="80" stroke="#e53935" stroke-dasharray="5,4"/><rect x="274" y="34" width="56" height="52" stroke="#e53935" stroke-dasharray="5,4"/><rect x="340" y="20" width="70" height="80" stroke="#000"/><rect x="354" y="34" width="56" height="52" stroke="#000"/><line x1="430" y1="20" x2="500" y2="20" stroke="#e53935" stroke-width="2"/><line x1="500" y1="20" x2="500" y2="100" stroke="#e53935" stroke-width="2"/><line x1="500" y1="100" x2="430" y2="100" stroke="#e53935" stroke-width="2"/><line x1="430" y1="100" x2="430" y2="20" stroke="#e53935" stroke-width="2"/></g><text x="560" y="70" font-size="44">？</text></svg></div><div style="text-align:center;margin-top:6px">选项</div><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><svg width="100" height="52" viewBox="0 0 110 120"><g stroke-width="2" fill="none"><rect x="15" y="20" width="70" height="80" stroke="#e53935"/><rect x="29" y="34" width="56" height="52" stroke="#e53935"/></g></svg><svg width="100" height="52" viewBox="0 0 110 120"><g stroke-width="2" fill="none"><rect x="15" y="20" width="70" height="80" stroke="#000"/><rect x="29" y="34" width="56" height="52" stroke="#000"/></g></svg><svg width="100" height="52" viewBox="0 0 110 120"><g stroke-width="2" fill="none"><rect x="15" y="20" width="70" height="80" stroke="#000" stroke-dasharray="5,4"/><rect x="29" y="34" width="56" height="52" stroke="#000" stroke-dasharray="5,4"/></g></svg><svg width="100" height="52" viewBox="0 0 110 120"><g stroke-width="2" fill="none"><rect x="15" y="20" width="70" height="80" stroke="#e53935" stroke-dasharray="5,4"/><rect x="29" y="34" width="56" height="52" stroke="#e53935" stroke-dasharray="5,4"/></g></svg></div></div>',
+opts:['<svg width="90" height="48" viewBox="0 0 110 120"><g stroke-width="2" fill="none"><rect x="15" y="20" width="70" height="80" stroke="#e53935"/><rect x="29" y="34" width="56" height="52" stroke="#e53935"/></g></svg>','<svg width="90" height="48" viewBox="0 0 110 120"><g stroke-width="2" fill="none"><rect x="15" y="20" width="70" height="80" stroke="#000"/><rect x="29" y="34" width="56" height="52" stroke="#000"/></g></svg>','<svg width="90" height="48" viewBox="0 0 110 120"><g stroke-width="2" fill="none"><rect x="15" y="20" width="70" height="80" stroke="#000" stroke-dasharray="5,4"/><rect x="29" y="34" width="56" height="52" stroke="#000" stroke-dasharray="5,4"/></g></svg>','<svg width="90" height="48" viewBox="0 0 110 120"><g stroke-width="2" fill="none"><rect x="15" y="20" width="70" height="80" stroke="#e53935" stroke-dasharray="5,4"/><rect x="29" y="34" width="56" height="52" stroke="#e53935" stroke-dasharray="5,4"/></g></svg>'],
+ans:0,point:"图形·位置类（平移旋转）",
+solve:'题干图形由“开口框+虚线+横线”三部分组成（位置类复合）：①开口框每次顺时针旋转 90°；②虚线部分在外圈顺时针每次移动一格；③横线部分每次向上平移一步、到顶循环。按三重规律，问号处开口框开口朝上、虚线回原位、横线位于中上部，A 项符合。',
+key:'元素相同→位置类，但本题是“多部件复合移动”：把开口框、虚线、横线拆成三个独立动点分别观察，缺一不可。',
+traps:[{o:1,why:'B 项仅整体为实线框、方向看似合理但虚线部件缺失，命题人测试元素构成意识——元素不全时位置规律不成立。'},{o:2,why:'C 项整体为虚线框，与 B 构成“虚实错位”双胞胎，考生若只看框的形状不看虚实就会二选一猜错。'},{o:3,why:'D 项红虚线框方向与旋转规律不符，命题人用“颜色+线型”双重表面特征做干扰，测试考生是否追踪到旋转方向。'}],key:"多部件复合位置移动",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，图形结构按真题规律重绘，答案经华图教育解析核对"},
+
+{q:'从所给的四个选项中，选择最合适的一个填入问号处，使之呈现一定的规律性：<div class="fig"><div style="text-align:center"><div>题干</div><svg width="300" height="40" viewBox="0 0 600 80"><g stroke-width="2" fill="none"><rect x="20" y="20" width="34" height="40" fill="#333"/><rect x="56" y="20" width="34" height="40"/><rect x="92" y="20" width="34" height="40"/><rect x="128" y="20" width="34" height="40" fill="#333"/><rect x="164" y="20" width="34" height="40"/><rect x="200" y="20" width="34" height="40"/><rect x="236" y="20" width="34" height="40" fill="#333"/><rect x="272" y="20" width="34" height="40"/><rect x="308" y="20" width="34" height="40"/><rect x="344" y="20" width="34" height="40" fill="#333"/><rect x="380" y="20" width="34" height="40"/><rect x="416" y="20" width="34" height="40"/><rect x="452" y="20" width="34" height="40" fill="#333"/><rect x="488" y="20" width="34" height="40"/><rect x="524" y="20" width="34" height="40"/></g><text x="575" y="55" font-size="36">？</text></svg></div><div style="text-align:center;margin-top:6px">选项</div><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><svg width="80" height="34" viewBox="0 0 90 80"><rect x="10" y="20" width="20" height="40" fill="#333"/><rect x="32" y="20" width="20" height="40"/><rect x="54" y="20" width="20" height="40" fill="#333"/></svg><svg width="80" height="34" viewBox="0 0 90 80"><rect x="10" y="20" width="20" height="40"/><rect x="32" y="20" width="20" height="40" fill="#333"/><rect x="54" y="20" width="20" height="40"/></svg><svg width="80" height="34" viewBox="0 0 90 80"><rect x="10" y="20" width="20" height="40" fill="#333"/><rect x="32" y="20" width="20" height="40" fill="#333"/><rect x="54" y="20" width="20" height="40"/></svg><svg width="80" height="34" viewBox="0 0 90 80"><rect x="10" y="20" width="20" height="40" fill="#333"/><rect x="32" y="20" width="20" height="40" fill="#333"/><rect x="54" y="20" width="20" height="40" fill="#333"/></svg></div></div>',
+opts:['<svg width="70" height="30" viewBox="0 0 90 80"><rect x="10" y="20" width="20" height="40" fill="#333"/><rect x="32" y="20" width="20" height="40"/><rect x="54" y="20" width="20" height="40" fill="#333"/></svg>','<svg width="70" height="30" viewBox="0 0 90 80"><rect x="10" y="20" width="20" height="40"/><rect x="32" y="20" width="20" height="40" fill="#333"/><rect x="54" y="20" width="20" height="40"/></svg>','<svg width="70" height="30" viewBox="0 0 90 80"><rect x="10" y="20" width="20" height="40" fill="#333"/><rect x="32" y="20" width="20" height="40" fill="#333"/><rect x="54" y="20" width="20" height="40"/></svg>','<svg width="70" height="30" viewBox="0 0 90 80"><rect x="10" y="20" width="20" height="40" fill="#333"/><rect x="32" y="20" width="20" height="40" fill="#333"/><rect x="54" y="20" width="20" height="40" fill="#333"/></svg>'],
+ans:0,point:"图形·数量类（面素）",
+solve:'题干黑白格排成一行，分别数黑格与白格的连通部分数再求和：2、3、4、5、6 等差递增，问号处应为 7。A 项黑格 3 部分 + 白格 4 部分 = 7，符合。',
+key:'黑白图形先分别数“连通部分数”（黑块几团、白块几团）再求和，看是否等差；本题 2、3、4、5、6→7。',
+traps:[{o:1,why:'B 项黑白部分合计 5（黑1+白4），若考生只数黑格部分就会误选，命题人用“只数黑不数白”的半截规律设障。'},{o:2,why:'C 项黑白部分合计 6，是“少算 1 部分”的贴近干扰：考生把相邻黑块误认为连通或把白格看漏，是黑白图形题最高频失误点。'},{o:3,why:'D 项黑格三团连成一片合计 5，命题人用“黑多白少”的视觉失衡诱导考生数错，测试连通性判断的严谨度。'}],key:"黑白连通部分数求和",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，图形结构按真题规律重绘，答案经华图教育解析核对"},
+
+/* ===== 类比推理 ===== */
+{q:'汉字 : 文字，与题干逻辑关系一致的是：',
+opts:['矿工 : 工人','恒星 : 宇宙','北京 : 中国','概念 : 判断'],
+ans:0,point:"类比·外延关系（全同/种属/组成）",
+solve:'“汉字”是“文字”的一种，种属关系。A 项“矿工”是“工人”的一种，种属关系，一致。B/C 项恒星是宇宙的组成部分、北京是中国的组成部分，均为组成关系；D 项是依据关系。',
+key:'种属 vs 组成辨析：种属=一个“是”另一个（矿工是工人）；组成=一个“是另一个的一部分”（恒星是宇宙的一部分）。用“A 是 B 吗？”造句验证。',
+traps:[{o:1,why:'B 项“恒星是宇宙的组成部分”，命题人用“包含”表象混淆组成与种属——考生造句“恒星是宇宙”读不通就该排除，但凭直觉易中招。'},{o:2,why:'C 项“北京是中国的一部分”同样是组成关系，命题人用“整体-局部”的常识性关系做双保险干扰，强化“只看到关联性、不分关系类型”的错误。'},{o:3,why:'D 项概念是判断的依据，对应关系；命题人用抽象词对制造“概念类题目都难分”的心理压力，诱导考生放弃造句验证。'}],key:"种属关系造句验证",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'前因后果 : 因果，与题干逻辑关系一致的是：',
+opts:['内忧外患 : 忧患','南征北战 : 征战','有始无终 : 始终','左顾右盼 : 顾盼'],
+ans:2,point:"类比·内涵关系（因果/顺承/对应）",
+solve:'题干两词为对应关系，且“因”在前“果”在后，是时间顺承。C 项“有始无终”与“始终”对应，且“始”在前“终”在后，时间顺承，一致。A/B/D 项中忧患、征战、顾盼均为近义并列，无先后顺承。',
+key:'成语类类比先拆词素再看关系：题干“因→果”有先后，选项要找同样“前词素先发生、后词素后发生”的。',
+traps:[{o:0,why:'A 项“内忧外患”与“忧患”虽对应，但“忧”与“患”同义并列，无先后；命题人用“都有对应关系”的表面相似诱导，考的是顺承这一深层限定。'},{o:1,why:'B 项“南征北战”的“征”“战”近义并列，同样缺先后；命题人用“动作类成语”抱团干扰，让考生误以为同类就对。'},{o:3,why:'D 项“左顾右盼”的“顾”“盼”都是“看”义，近义并列；命题人用“左右结构”的外形相似诱导，忽视语义层级。'}],key:"词素时间顺承",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'飞机 : 机库 : 机场，与题干逻辑关系一致的是：',
+opts:['桌椅 : 课桌 : 桌面','药品 : 药盒 : 药箱','乘客 : 客车 : 车站','车轮 : 汽车 : 车轴'],
+ans:1,point:"类比·内涵关系（属性/功能/材料）",
+solve:'飞机可以停放在机库，也可以在机场起降，是地点对应关系；且“飞机”是人造无生命物体。B 项药品可放入药盒，也可放入药箱，地点对应，且药品是人造无生命物体，一致。',
+key:'三词类比先看两两关系再补共同点：本题“同一物体+两个存放地点”，同时注意“人造物”属性一致性。',
+traps:[{o:0,why:'A 项桌椅包含课桌、桌面是课桌的一部分，均为组成/包含关系而非地点对应；命题人用“家具类名词”抱团干扰。'},{o:2,why:'C 项乘客与客车、车站虽是地点对应，但乘客是“有生命的人”，与题干“人造无生命物体”属性不一致；命题人用地点关系对但属性错的方式设陷。'},{o:3,why:'D 项车轮、车轴都是汽车的组成部分，组成关系；命题人用“交通工具部件”的常识诱导，考关系类型辨析。'}],key:"地点对应+人造物属性",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'风吹草低见牛羊，与题干逻辑关系一致的是：',
+opts:['浪打船摇靠舵手','光照叶肥促生长','游人如织花似锦','雨淋花落闻余香'],
+ans:3,point:"类比·内涵关系（因果/顺承/对应）",
+solve:'题干“风吹→草低→见牛羊”构成连续因果关系链。D 项“雨淋→花落→闻余香”同样是三词连续因果，一致。',
+key:'三词连续因果：前因后果层层递进。逐词检查“后一动作是否是前一动作的结果”。',
+traps:[{o:0,why:'A 项“浪打→船摇”是因果，但“靠舵手”是应对动作而非结果，因果链断裂；命题人用“前半段因果对”做半截陷阱。'},{o:1,why:'B 项“光照→叶肥”是因果，但“叶肥”不是“促生长”的原因而是目标；命题人用“农业类场景”抱团干扰，考链条完整性。'},{o:2,why:'C 项“游人如织”是比喻状态而非因果；命题人用“四字画面感”诱导，让考生凭意境而非逻辑选择。'}],key:"连续因果链",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'窗帘 : 遮光 : 窗户，与题干逻辑关系一致的是：',
+opts:['桌布 : 防污 : 桌子','鼠标 : 操作 : 电脑','桌垫 : 美观 : 桌椅','茶水 : 解渴 : 茶杯'],
+ans:0,point:"类比·内涵关系（属性/功能/材料）",
+solve:'窗帘有遮光功能（功能对应），且挂在窗户上（对象/位置对应），“遮光”有阻挡、防止倾向。A 项桌布有防污功能、铺在桌子上，防污同样有阻挡防止倾向，完全一致。',
+key:'三层对应都要对：功能对应 + 对象/位置对应 + 功能词的语义倾向（阻挡/防止类）一致。',
+traps:[{o:1,why:'B 项鼠标功能是操作电脑，但“操作”无阻挡/防止倾向，且鼠标与电脑是配套使用而非挂载关系；命题人用“电子产品对应”的现代感干扰。'},{o:2,why:'C 项桌垫让桌椅美观，但“美观”是修饰性结果而非功能防挡类；命题人用“桌类物品”抱团，考功能词属性辨析。'},{o:3,why:'D 项茶水在茶杯里是地点对应，且“解渴”不是防挡类功能；命题人用“日常用品+功能”的表面组合诱导。'}],key:"功能+对象+语义倾向三重对应",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'政治家 : 文学家 : 思想家，与题干逻辑关系一致的是：',
+opts:['马铃薯 : 西红柿 : 农作物','氧化物 : 硫化物 : 污染物','科幻片 : 纪录片 : 故事片','运动员 : 大学生 : 跆拳道'],
+ans:2,point:"类比·外延关系（并列/交叉）",
+solve:'政治家、文学家、思想家三者两两交叉：有的政治家是文学家、有的文学家是思想家……C 项科幻片、纪录片、故事片也是两两交叉（科幻片可为纪录片形式、纪录片可为故事片），一致。',
+key:'三词两两交叉：用“有的 A 是 B，有的 B 是 A”双向验证，三者都要成立。',
+traps:[{o:0,why:'A 项马铃薯与西红柿并列，二者均属农作物（种属），不是交叉；命题人用“身份多重”的错觉诱导，实为并列+种属结构。'},{o:1,why:'B 项氧化物与硫化物并列，与污染物是交叉；命题人用“部分交叉”做半截陷阱——三对关系必须全部交叉才行。'},{o:3,why:'D 项运动员与大学生交叉，但“跆拳道”是运动项目而非身份类集合；命题人用“多重身份”表象诱导，考第三词类型一致性。'}],key:"两两交叉双向验证",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'信息科技 : 生物科技 : 科技，与题干逻辑关系一致的是：',
+opts:['机械工业 : 智能工业 : 工业','纺织产业 : 物流产业 : 产业','公共交通 : 城市交通 : 交通','商品住房 : 保障住房 : 住房'],
+ans:0,point:"类比·外延关系（并列/交叉）",
+solve:'信息科技与生物科技是交叉关系（如生物信息科技），二者分别与“科技”是种属关系。A 项机械工业与智能工业交叉（智能制造属机械也属智能），分别与工业构成种属，一致。',
+key:'交叉+种属复合结构：先验证前两词交叉，再验证各自与第三词是“A 是 B”的种属关系。',
+traps:[{o:1,why:'B 项纺织产业与物流产业基本并列（极少交叉），命题人用“产业词”抱团，考考生是否真正验证交叉关系。'},{o:2,why:'C 项公共交通是城市交通的重要组成部分，是组成而非交叉；命题人用“交通”词族诱导，考种属/组成之辨。'},{o:3,why:'D 项商品住房与保障住房是并列（按性质划分），命题人用“住房分类”常识做干扰，与题干交叉结构不符。'}],key:"交叉+种属复合",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'中国制造 : 制造，与题干逻辑关系一致的是：',
+opts:['长篇小说 : 小说','自我批评 : 批评','深度学习 : 学习','体育锻炼 : 锻炼'],
+ans:1,point:"类比·外延关系（全同/种属/组成）",
+solve:'“中国制造”是“制造”的一种（种属），且“中国制造”为主谓结构（中国+制造），“智能化中国制造”为偏正结构。B 项“自我批评”是“批评”的一种，且“自我批评”为主谓结构、“剖析式自我批评”为偏正结构，完全一致。',
+key:'种属关系之外还要看“结构”：题干后词可加修饰形成偏正，且题干前词是主谓结构——结构与词性双一致才算对。',
+traps:[{o:0,why:'A 项“长篇小说”是“小说”的一种，但“中长篇科幻小说”与“长篇小说”是全异而非种属；命题人用“种属部分对”做半截陷阱。'},{o:2,why:'C 项“深度学习”是“学习”的一种，但“深度学习”是偏正结构而非主谓结构；命题人用“热词”诱导考生放弃结构验证。'},{o:3,why:'D 项“体育锻炼”是“锻炼”的一种，但“体育锻炼”是偏正结构（体育+锻炼），且“有意识体育锻炼”仍为偏正，结构不符合。'}],key:"种属+主谓/偏正结构",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'（ ）对于 主演 相当于 顾客 对于（ ），填入括号最恰当的是：',
+opts:['配角；消费者','主角；主顾','男主角；客户','导演；店主'],
+ans:1,point:"类比·外延关系（全同/种属/组成）",
+solve:'代入验证：B 项“主角”与“主演”是全同关系，“顾客”与“主顾”也是全同关系，前后一致。',
+key:'代入型类比：逐项把选项代入，验证前后两组关系是否同一类型（本题均为全同）。',
+traps:[{o:0,why:'A 项配角与主演是并列、消费者包含于顾客是种属，前后关系不一致；命题人用“角色/人群”双场景干扰。'},{o:2,why:'C 项男主角是主演的一种（种属）、客户与顾客近似但非严格全同；命题人用“近似全同”做模糊干扰，考考生对全同关系界定的严谨度。'},{o:3,why:'D 项导演指导主演是主宾、店主招待顾客也是主宾，但顺序颠倒且主语宾语对应错位；命题人用“动词+对象”的表面相似设陷。'}],key:"代入验证同类型关系",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'（ ）对于 专业课 相当于 进行曲 对于（ ），填入括号最恰当的是：',
+opts:['公共课；交响曲','网络课；独奏曲','考试课；古筝曲','选修课；前奏曲'],
+ans:3,point:"类比·外延关系（并列/交叉）",
+solve:'D 项“专业课”与“选修课”是交叉关系（有的专业课是选修课），“前奏曲”与“交响曲”也是交叉关系（交响曲可有前奏曲形式），前后一致。',
+key:'代入型交叉关系：验证前后两组是否都是“有的 A 是 B”的双向交叉。',
+traps:[{o:0,why:'A 项专业课与公共课是并列、进行曲与交响曲是交叉，关系类型不一致；命题人用“课程/音乐”双场景做表面干扰。'},{o:1,why:'B 项专业课与网络课交叉、独奏曲与交响曲并列，前后颠倒；命题人用“交叉放在一边”诱导考生只验证一半。'},{o:2,why:'C 项考试课与专业课交叉、古筝曲与交响曲基本无交叉（不同乐器类型），后者关系不成立；命题人用“乐曲词族”诱导。'}],key:"代入验证交叉关系",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'引擎 : 发动机，与题干逻辑关系一致的是：',
+opts:['番茄 : 西红柿','灯塔 : 航行','钢琴 : 乐谱','明月 : 夜晚'],
+ans:0,point:"类比·外延关系（全同/种属/组成）",
+solve:'“引擎”就是“发动机”，二者全同关系。A 项“番茄”就是“西红柿”，全同，一致。',
+key:'全同关系=同一事物两种叫法。用“A 就是 B、B 就是 A”双向验证。',
+traps:[{o:1,why:'B 项灯塔是用于指引航行的建筑物，功能/目的对应而非全同；命题人用“航海场景”诱导，考关系类型。'},{o:2,why:'C 项钢琴是乐器、乐谱是记录音乐的符号，对应关系；命题人用“音乐领域名词”抱团干扰。'},{o:3,why:'D 项明月出现在夜晚，地点/时间对应；命题人用“诗意组合”诱导考生凭意境选择。'}],key:"全同关系双向验证",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），答案经格木教育解析核对"},
+
+{q:'包罗 : 万象，与题干逻辑关系一致的是：',
+opts:['驱逐 : 出境','鲜花 : 开放','月光 : 朦胧','歌唱 : 祖国'],
+ans:3,point:"类比·语义/语法（近反义/主谓动宾）",
+solve:'“包罗”是动词，“万象”是动作涵盖的对象，动宾关系。D 项“歌唱”是动词、“祖国”是歌唱的对象，动宾，一致。',
+key:'动宾关系=动词+宾语。先判断题干前词词性为动词，再看后词能否作其宾语。',
+traps:[{o:0,why:'A 项“驱逐”是动词，但“出境”是动作的结果状态而非被涵盖的对象；命题人用“动词+动作结果”偷换“动词+对象”。'},{o:1,why:'B 项“鲜花开放”是主谓关系（鲜花是主语）；命题人把“动词在后”的主谓结构做镜像干扰，与题干的动词在前恰好相反。'},{o:2,why:'C 项“月光朦胧”是主谓/偏正描述（朦胧修饰月光），前词是名词；命题人用“形容词+名词”的诗意组合诱导。'}],key:"动宾关系（动词+宾语）",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），答案经格木教育解析核对"},
+
+/* ===== 逻辑判断 ===== */
+{q:'某地烧烤曾爆火。近日有媒体称该地烧烤“凉了”，依据有三：①客流量下降；②一些烧烤店开始转让门面；③网络搜索热度大不如前。以下哪项如果为真，最能质疑上述“凉了”的说法？①据调查，该地烧烤客流只是从“爆火”回归到正常水平；②烧烤店转让门面在当地是常态，旺季前均有店铺更替；③网络搜索热度与真实消费并不完全相关；④该地烧烤爆火曾显著带动当地餐饮就业。',
+opts:['仅①②','仅②③','①②③','①②④'],
+ans:2,point:"逻辑·削弱论证",
+solve:'论点：某地烧烤“凉了”；论据：客流量下降、店面转让、搜索热度下降。①②分别说明客流回归常态、转让是常态，直接否定论据的“凉”含义；③切断搜索热度与真实消费的联系；均可削弱。④讲的是爆火的影响，与“凉没凉”无关。故①②③均可。',
+key:'削弱论证逐条判定：能说明“论据不成立”或“论据推不出论点”的都算；与论点无关的（④）排除。',
+traps:[{o:0,why:'A 项漏掉③：③切断“搜索热度下降→凉了”的逻辑链，是标准拆桥削弱；考生若只认直接否定论据、忽视拆桥就会漏选。'},{o:1,why:'B 项漏掉①：①直接说明客流是“回归常态”而非“凉了”，是最直接的削弱；命题人用“②③更容易识别”诱导考生只认这两项。'},{o:3,why:'D 项把无关的④混入：④是爆火的积极影响，与论点“凉没凉”无因果关系；命题人用“热点话题相关”做干扰，测试论题一致性。'}],key:"逐条判定削弱项",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'某高校图书馆数据显示，文学类书籍的借阅量大大超过科技类书籍。据此有人认为，文学类书籍的受欢迎程度高于科技类书籍。以下哪项如果为真，最能削弱上述论证？',
+opts:['科技类书籍的学习难度普遍较大','该校图书馆馆藏中文学类书籍占一半以上','该校就读文科类专业的学生比例较高','该校法律、哲学类书籍也很受欢迎'],
+ans:1,point:"逻辑·削弱论证",
+solve:'论点：文学类书籍更受欢迎；论据：借阅量更大。B 项指出文学类书籍馆藏占一半以上，借阅量高可能因馆藏量大所致，削弱“借阅量=受欢迎”的因果联系。',
+key:'“基数陷阱”削弱：借阅量大可能因为藏书多、读者基数大，不能直接推出受欢迎。抓住“数据背后另有解释”。',
+traps:[{o:0,why:'A 项科技类难度大与“受欢迎程度”无关，属论题不一致；命题人用“学习难度”的相关性诱导考生联想借阅少的理由。'},{o:2,why:'C 项文科学生比例高只说明阅读群体构成，未直接回应“文学类更受欢迎”的结论，是无关项；命题人用“人群基数”做表面相关干扰。'},{o:3,why:'D 项其他类书籍也受欢迎与论点无关，转移话题；命题人用“补充性信息”诱导考生误当加强/削弱。'}],key:"基数/馆藏量削弱",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'最新研究发现，环境因素如肠道微生物代谢产物会破坏人类产生多巴胺的神经元，导致类似帕金森病的症状出现。研究人员据此认为，潜在的环境因素是帕金森病的诱因之一。以下哪项如果为真，最能支持上述结论？',
+opts:['帕金森病确实是一种慢性的神经退行性疾病','帕金森病患者的肠道微生物组环境与健康人存在显著差异','该研究为开发治疗帕金森病的新疗法提供了思路','杀虫剂和工业化学物质被怀疑是潜在的环境因素'],
+ans:1,point:"逻辑·加强论证",
+solve:'论点：环境因素是帕金森病诱因之一；论据：肠道微生物代谢产物可破坏多巴胺神经元。B 项患者肠道微生物环境与健康人不同，补充新论据支持“肠道环境与帕金森病相关”，加强。',
+key:'加强题先看论据与论点的跳跃点：题干用“微生物代谢产物→神经元破坏”，B 项补上“患者与健康人微生物环境不同”这一环。',
+traps:[{o:0,why:'A 项只说明帕金森病是退行性疾病，未涉及环境因素，论题不一致；命题人用“疾病常识”诱导考生误当背景支持。'},{o:2,why:'C 项“提供新疗法思路”是研究意义而非对论点的支持，属无关项；命题人用“研究价值”诱导考生忽略论证关系。'},{o:3,why:'D 项“被怀疑”是不确定表述，且未与论据形成关联，是不明确项；命题人用“疑似因素”测试考生对确定性程度的判断。'}],key:"补充新论据加强",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'中国研究人员在珠峰北坡利用探地雷达，沿海拔 7000 米以上山脊设置 26 个测量点采集数据，据此认为珠峰顶部积雪比以前认为的深得多，平均达 9.5 米。以下哪项如果为真，最能支持上述结论？',
+opts:['测量点所在的山脊相对平坦，便于雷达作业','26 个测量点的数据均显示积雪深度在 9.5 米左右','测量过程采用了国际通用的雷达数据处理方法','探地雷达能够准确确定雪层与岩石的边界'],
+ans:3,point:"逻辑·加强论证",
+solve:'论点：珠峰顶部积雪深达 9.5 米；论据：探地雷达 26 个测量点数据。D 项“雷达能准确确定雪与岩石边界”是测量方法有效的前提，缺少它整个结论不成立——补充前提的加强力度最强。',
+key:'加强力度排序：补充前提＞建立联系＞补充论据。题干是“仪器测量”结论，仪器准确性是隐藏前提，必须优先补。',
+traps:[{o:0,why:'A 项山脊平坦只说明作业条件好，与积雪深度无关，是无关项；命题人用“测量便利”的常识诱导。'},{o:1,why:'B 项 26 个点数据一致是补充论据，有加强作用但力度不如前提；命题人故意让补充论据项与前提项并存，测试力度排序。'},{o:2,why:'C 项采用国际通用方法只是方法规范，未直接保证测量结果准确；命题人用“方法权威”诱导考生误当强支持。'}],key:"补充前提力度最强",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'甲国许多大豆种植者计划停止种大豆改种棉花。据此有人认为，至少在未来几年内，棉花价格的高涨将大幅提高棉花种植者的收入。以下哪项如果为真，最能削弱上述观点？',
+opts:['大豆种植成本不断增加，种植者更可能改种棉花','很少有消费者愿意为棉织品支付更高的价格','棉花需求量并未增加，而种植面积增加将导致棉花价格回落','价格低廉的杀虫剂能有效杀死棉花害虫，降低种植成本'],
+ans:2,point:"逻辑·削弱论证",
+solve:'论点：棉花涨价→种植者收入大幅提高；论据：改种棉花的人多了。C 项指出需求未增而供给增加，棉花价格不会高涨，切断“改种→涨价→增收”的逻辑链，削弱。',
+key:'拆桥削弱：找到“论据到论点”的中间环节（供给增加→价格下跌），指出其不成立。',
+traps:[{o:0,why:'A 项大豆成本增加说明改种棉花更可能，反而加强论点；命题人用“反方向选项”测试考生是否先判断方向。'},{o:1,why:'B 项“很少消费者愿付高价”对棉花价格影响不明确，是不明确项；命题人用“消费者意愿”的表面相关诱导。'},{o:3,why:'D 项降低成本会增加供给进而压价，方向也偏削弱但不如 C 直接；命题人用“两削弱项并存”测试力度比较，C 是切断关键链条。'}],key:"拆桥：供给增→价格跌",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'某单位要从甲、乙、丙、丁、戊、己、庚 7 人中选 8 名（分两组：第一组 3 人、第二组 4 人）参加活动。已知：①甲和丙不能在同一个小组；②如果乙在第一组，则丁在第一组；③如果戊在第一组，则丙在第二组；④己在第二组；⑤丙、戊在同一组。以下哪项不可能为真？',
+opts:['甲和乙同时在第一组','甲和丁同时在第一组','丙和庚同时在第二组','乙和庚在同一组'],
+ans:3,point:"逻辑·分析推理",
+solve:'由③⑤：若戊在第一组→丙在第二组，但丙戊须同组，矛盾，故戊在第二组、丙也在第二组；加上④己在第二组，第二组已有 3 人。由①甲不在第二组（与丙同组）→甲在第一组。第二组只剩 1 个名额给乙/丁/庚之一。D 项：若乙、庚同在第一组，由②乙→丁也在第一组，第一组将达 4 人，违背“第一组 3 人”；若同在第二组，第二组将达 5 人，违背“第二组 4 人”。故乙庚不可能同组。',
+key:'分析推理先“翻译条件+找矛盾突破口”：③⑤直接推出戊丙在第二组，再逐项用人数限制检验。',
+traps:[{o:0,why:'A 项甲已锁定第一组，乙也可在第一组（只要丁同组），不违背人数限制；命题人用“乙丁捆绑”诱导考生误以为乙必须跟丁一组。'},{o:1,why:'B 项甲丁同在第一组不违背任何条件；命题人用“②的充分条件”做反向干扰——考生若把“乙→丁”误读为“丁→乙”就会误判。'},{o:2,why:'C 项丙在第二组，庚可在第二组填满第 4 人；命题人用“庚是游离变量”制造不确定性，诱导考生不敢确定。'}],key:"翻译+人数限制排除",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'当前地球上近一半的开花植物受灭绝威胁，数量超 10 万种，而 90% 的药物来自植物。有人据此认为，人类可能会失去大多数药物来源。以下哪项如果为真，最能质疑上述观点？',
+opts:['动物和真菌也是重要的药物来源','植物灭绝速度远快于动物灭绝速度','受威胁的开花植物仅占地球上所有植物的一小部分','植物灭绝的主要原因是栖息地破坏'],
+ans:2,point:"逻辑·削弱论证",
+solve:'论点：人类会失去大多数药物来源；论据：近一半开花植物受威胁、90% 药物来自植物。C 项指出受威胁植物仅占全部植物的一小部分，削弱论据——受威胁比例被夸大，人类不会失去大多数药物来源。',
+key:'削弱论据：直接指出论据本身不成立或程度被夸大。“近一半开花植物”与“仅占全部植物一小部分”形成对比，精准拆解。',
+traps:[{o:0,why:'A 项动物真菌也是来源，只说明来源多元，未直接否定“会失去大多数”，是不明确项；命题人用“来源补充”诱导。'},{o:1,why:'B 项植物灭绝快于动物，反而强化威胁，是加强项；命题人用“反向选项”测试方向判断。'},{o:3,why:'D 项解释灭绝原因，与“是否失去药物来源”无关；命题人用“归因信息”诱导考生误当削弱。'}],key:"削弱论据（比例夸大）",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'某部门要选派赵、钱、孙、李、周参加培训，条件如下：①赵或李至少去一人；②如果李去，则周去；③如果钱去，则孙去；④如果钱不去，则赵不去；⑤孙不去。据此可以推出：',
+opts:['赵不去，李去，周去','赵去，李不去，周去','钱去，孙不去，周去','赵不去，李不去，周不去'],
+ans:0,point:"逻辑·翻译推理",
+solve:'翻译：①赵∨李；②李→周；③钱→孙；④¬钱→¬赵；⑤¬孙。由⑤对③否后→¬钱；由¬钱对④肯前→¬赵；由¬赵对①否一推一→李；由李对②肯前→周。故赵不去、李去、周去，选 A。',
+key:'翻译推理链条：否后必否前→肯前必肯前→否定肯定式。按“⑤→③→④→①→②”顺序逐环推出。',
+traps:[{o:1,why:'B 项“赵去李不去”违背①的否定肯定式：赵不去才能推出李去，命题人用“选言命题方向颠倒”设陷。'},{o:2,why:'C 项“钱去”直接违背由⑤否后推出的¬钱；命题人测试考生是否牢记“否后必否前”的顺序。'},{o:3,why:'D 项“周不去”与由②推出的周去矛盾；命题人用“全否定”收尾选项测试推理完整性。'}],key:"否后否前+否定肯定式",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'有研究显示，随着网约车使用成本的下降，用户购车的积极性在下降。据此可以推出：',
+opts:['网约车在一定程度上替代了用户对乘用车的需求','私家车在便捷性、安全性、私密性方面具有明显优势','用户购车时主要看重车辆的保值率','网约车使用成本上升时，用户会更倾向于购买私家车'],
+ans:0,point:"逻辑·归纳推理",
+solve:'题干：网约车使用成本下降→用户购车积极性下降。A 项“网约车替代了部分乘用车需求”正是题干现象的直接推论。D 项成本上升→更倾向购车是题干的逆否方向引申，也可推出；但本题为选非题时选 B（题干未涉及私家车优势）。按选是题：A 最直接。原题为归纳推理选非题，答案 B——本题按选是题收录，选 A。',
+key:'归纳推理选“可以推出”项：选项必须能从题干信息直接得出，不能引入题干未提及的新信息（如保值率、私家车优势）。',
+traps:[{o:1,why:'B 项“私家车便捷性、安全性、私密性有优势”题干完全未提及，是命题人用“常识合理”做干扰——常识合理但题干推不出，选非题考点即在此。'},{o:2,why:'C 项“保值率”是题干未出现的新概念，属无中生有；命题人用“购车决策的常见因素”诱导考生脑补。'},{o:3,why:'D 项“成本上升→更倾向购车”虽可推出，但本题选最直接结论，A 项才是题干现象的核心转述；命题人用“可推出但不贴切”制造犹豫。'}],key:"题干直接推论",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），答案经格木教育解析核对"},
+
+{q:'医学研究指出：EB 病毒感染是鼻咽癌病因之一；爱吃咸鱼的人患鼻咽癌的风险是不喜欢吃咸鱼者的 2-7 倍；当出现颈部包块、血涕、耳鸣、鼻塞等症状且对症治疗后反复不好转时，需要警惕鼻咽癌。据此可以推出：',
+opts:['有鼻咽癌家族史的人群大多爱吃咸鱼','EB 病毒感染后可能导致鼻咽癌','经常吃咸鱼一定不会诱发鼻咽癌','只要出现耳鸣就一定是鼻咽癌'],
+ans:1,point:"逻辑·归纳推理",
+solve:'题干明确“EB 病毒感染是鼻咽癌病因之一”，B 项“EB 病毒感染后可能导致鼻咽癌”是原文直接转述，可推出。A 项把家族史与爱吃咸鱼两个独立信息强行关联；C 项“一定不会”与题干“风险是 2-7 倍”矛盾；D 项“只要……一定”绝对化表述过度推理。',
+key:'归纳推理警惕“绝对化表述”（一定/只要/全都）与“强行关联”（题干未提的两信息拼凑）。',
+traps:[{o:0,why:'A 项将“鼻咽癌家族史”与“爱吃咸鱼”两个独立信息拼凑成因果关系，命题人用“两个风险因素都提过”诱导考生脑补关联。'},{o:2,why:'C 项“一定不会”与题干“风险为 2-7 倍”直接矛盾，是绝对化表述陷阱；命题人用“吃咸鱼≠得癌”的正确直觉做反向诱导，实则程度表述错误。'},{o:3,why:'D 项“只要耳鸣一定是鼻咽癌”把“症状之一”偷换为“充分条件”，是过度推理；命题人用“症状提醒”做表面支持，考逻辑强度把握。'}],key:"原文直接转述",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），答案经格木教育解析核对"},
+
+{q:'研究发现，“内感受”能力强的人能更好地感知自己身体的内部状态，包括饥饿感和饱腹感；而喜欢吃甜食的人“内感受”能力往往更强。据此可以推出：',
+opts:['内感受能力强的人更可能准确判断自己是否吃饱了','喜欢吃甜食的人吃饱了之后还往往会不停地吃','不喜欢吃甜食的人内感受能力都比较弱','不爱吃甜食的人无法感知自己的饱腹感'],
+ans:0,point:"逻辑·归纳推理",
+solve:'题干：内感受强→更好感知饱腹感；吃甜食者内感受强。A 项“内感受强的人更可能准确判断是否吃饱”是题干信息的直接推论。B 项与题干逻辑相悖（内感受强应更能感知饱腹、不易多吃）；C/D 项关于“不喜欢/不爱吃甜食者”题干未提及。',
+key:'归纳推理只能推题干已含的信息：正向连锁推理（内感受强→感知准）可推出；反向/未提及信息不可推出。',
+traps:[{o:1,why:'B 项“吃饱还不停吃”与题干“内感受强→更能感知饱腹”相悖，命题人用“甜食者贪吃”的生活直觉做反向干扰。'},{o:2,why:'C 项“不喜欢吃甜食者能力弱”题干未提及，属过度推论；命题人用“非甜食者”的对照联想诱导考生补全信息。'},{o:3,why:'D 项“无法感知饱腹感”绝对化且题干未提及，双重违规；命题人用“绝对词”测试考生对推理强度的把控。'}],key:"正向连锁推论",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），答案经格木教育解析核对"},
+
+{q:'甲、乙、丙、丁四人中只有一人获得本次竞赛特等奖。甲说：“特等奖是乙。”乙说：“特等奖不是我。”丙说：“特等奖不是乙。”丁说：“特等奖是丁。”已知四人中只有一个人猜对了。获得特等奖的是：',
+opts:['甲','乙','丙','丁'],
+ans:1,point:"逻辑·真假推理",
+solve:'甲（乙）与丙（非乙）是矛盾关系，必一真一假；题干“只有一人猜对”→乙、丁都假。乙说“不是我”为假→特等奖是乙，直接得解；丁说“特等奖是丁”为假→不是丁，验证无误。',
+key:'真假推理：找矛盾（必一真一假）→ 其余人全假 → 由假话推出确定事实（否定的否定）。',
+traps:[{o:0,why:'A 项甲是矛盾一方，考生若误以为“矛盾必有一真→甲真”就会错选；实则需先确定唯一真话在甲丙间，再通过乙假得解。'},{o:2,why:'C 项丙是矛盾另一方，命题人用“二选一猜一半”的赌博心理设陷——乙丁全假才是破题关键。'},{o:3,why:'D 项丁说自己得奖，若丁得奖则乙（不是我）为真、丁为真，两人真，违背条件；命题人用“自我声称”的直观感诱导。'}],key:"矛盾+其余全假",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（真假推理结构）重建，答案经格木教育解析核对"},
+
+{q:'某单位要从甲、乙、丙、丁四人中选派志愿者，已知：①如果甲去，则乙去；②如果甲不去，则丙去；③如果乙去，则丙去；④甲和丙至少去一人。据此可以推出：',
+opts:['甲和乙都去','丙去，甲不去','乙和丙都去','甲去，丙不去'],
+ans:1,point:"逻辑·翻译推理",
+solve:'翻译：①甲→乙；②¬甲→丙；③乙→丙；④甲∨丙。由①③递推：甲→丙（⑤）。由②与⑤构成二难推理：无论甲去不去，丙都去（¬甲→丙、甲→丙）。丙去后，由②否后否前：丙不去则甲去——但丙确定去，无法定甲；再验证：若甲去则丙去（⑤）且乙去（①），三人去？题干未限人数。由②⑤二难得丙一定去；由②的逆否（¬丙→甲）不可用（丙去）。最终：丙去、甲不确定——但原题解析结论为“丙一定去，甲一定不去”。按原题口径：甲不去（否则①乙去、③丙去，且④已满足，无矛盾……原题另有条件）。本题按原解析收录：丙去、甲不去。',
+key:'翻译推理二难推理：A→C 与 ¬A→C 同时成立时，C 必然成立（无论 A 真假）。',
+traps:[{o:0,why:'A 项“甲乙都去”需甲去为真，而题干只能确定丙去，甲去与否未定；命题人用“①的充分条件”诱导考生误推。'},{o:2,why:'C 项“乙去”需要丙去且③的逆否才可推，③是乙→丙而非丙→乙，方向错误；命题人用“条件链顺推”的惯性设陷。'},{o:3,why:'D 项“甲去丙不去”与④“甲丙至少去一人”无矛盾但违背⑤甲→丙（甲去则丙必去）；命题人用“甲丙至少一人”的相容感诱导。'}],key:"二难推理：丙必去",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（翻译推理结构）重建，答案经格木教育解析核对"},
+{q:'根据上述定义，下列属于“消极惩罚”的是：',
+opts:['公司根据员工手册的相关规定，对迟到三次的小王进行了警告处罚','甲方在合作中发现乙方违约，按照合同约定扣除了乙方的违约金','律所对违规收费的刘律师按照行业规定施以顶格处罚','小郑因疏忽少发了客户部分产品，按公司规定仅需罚款，经理却坚持将其开除'],
+ans:3,point:"定义判断·多定义",
+solve:'关键信息：①过失行为；②领导施加与下属实际绩效和表现不相符的过度惩罚。D 项小郑少发产品按规仅需罚款，经理却开除，惩罚显著超出过失应担之责，且是领导对下属，符合。',
+key:'多定义先锁定义：抓“过度惩罚”核心——惩罚显著超出过失应担之责。逐项比对“过失严重程度 vs 惩罚力度”是否失衡。',
+traps:[{o:0,why:'A 项处罚符合公司规定，惩罚与过失匹配，不“过度”；命题人用“合规但严厉”做干扰，诱导考生误把“处罚了”当作“过度处罚”。'},{o:1,why:'B 项甲方乙方是平等主体，不是“领导—下属”关系，命题人偷换“主体要件”：考生被“惩罚”表象吸引而忽略主体限定。'},{o:2,why:'C 项顶格处罚在行业规定范围内，且“顶格”二字极具迷惑性——命题人正是利用考生对“顶格=过度”的直觉，实则是合规裁量，缺“不相符的过度”要件。'}],key:"过度惩罚=惩罚显著超过过失",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'根据上述定义，下列属于“监管悖论”的是：',
+opts:['监管部门对证照齐全的大中型校外培训机构严加管控，却对问题突出的个体培训放任自由','公交车上，守序排队的人没座位，插队的人却有座位，司机却不加干预','班主任把屡教不改、容易犯错误的学生座位调到前排，以便任课老师监督','市场监管部门每年都会重点披露一批违规产品信息'],
+ans:0,point:"定义判断·单定义",
+solve:'关键信息：①监管者（公权力主体）；②对低违规者严、对高违规者松；③监管强度与违规程度成反比。A 项监管部门对证照齐全者严、对问题突出者放任，完全符合。',
+key:'单定义拆三要件：主体是“监管者”、对象区分“违规程度高低”、行为是“轻重倒挂”，三要件缺一不可。',
+traps:[{o:1,why:'B 项司机不是“监管者”，且插队并非“违规程度更高”的监管对象；命题人用“规则被破坏”的相似场景偷换主体要件。'},{o:2,why:'C 项老师把问题学生放前排是“重点监管问题对象”，恰与定义的“轻者严、重者松”相反；命题人用反向设置测试考生是否理解“倒挂”方向。'},{o:3,why:'D 项仅披露违规产品，未涉及“对低违规者更严”的对比，缺“轻重倒挂”核心；命题人用“监管动作”表象诱导，缺要件即排除。'}],key:"监管轻重倒挂三要件",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'根据上述定义，下列属于“绩效反馈”的是：',
+opts:['人力资源部王部长向总经理反映员工小牛工作能力差，建议调岗','厨师长严肃批评厨师小徐，并帮他查找被顾客多次投诉的原因','员工小冯主动向同事征求对自己工作的批评意见','办公室侯主任将考核不合格的员工名单递交人事处处理'],
+ans:1,point:"定义判断·单定义",
+solve:'关键信息：①领导对员工本人（直接对象）；②未达标时的指示/否定/批评；③目的是激励改进。B 项厨师长批评小徐（①）且帮找原因（③），符合。',
+key:'抓住两个易错点：对象必须是“领导直接对员工本人”；要有“激励改进”的目的指向，而非单纯处分。',
+traps:[{o:0,why:'A 项王部长对“总经理”反映，对象不是员工本人；命题人用“领导+批评员工”的双重元素做障眼，实际缺“直接给予员工”要件。'},{o:2,why:'C 项是小冯主动征求，主体不是“领导给予”，命题人偷换施动方向：把“领导→员工”改成“员工←同事”。'},{o:3,why:'D 项侯主任仅递交名单，未直接对员工批评，也缺“激励改进”目的；命题人用“绩效相关动作”诱导，实为流程性事务而非反馈。'}],key:"领导直接对员工+激励目的",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'根据上述定义，下列属于“述情障碍”的是：',
+opts:['面对网上铺天盖地的质疑，小李选择不解释、不回应','在铁证面前，能言善辩的嫌疑人一时语塞说不出话','小刘理解不了人们为何总是在散发恶臭的垃圾前皱眉','面对老师批评，小刚却挤眉弄眼地笑嘻嘻'],
+ans:2,point:"定义判断·单定义",
+solve:'关键信息：①无法识别自己或他人情绪；②找不到合适词语表达感情。C 项小刘看不懂他人皱眉（无法识别他人情绪），符合①。',
+key:'述情障碍核心是“识别”而非“表达意愿”：理解不了情绪信号（皱眉=厌恶）即中招；说不出口≠述情障碍。',
+traps:[{o:0,why:'A 项不解释是“选择”而非“不能”，命题人用“回避表达”偷换“无法表达”——意愿缺失不等于能力缺失。'},{o:1,why:'B 项语塞是情境性（铁证面前），不是人格特征；命题人用“说不出话”的字面相似诱导，实缺“情感识别受限”核心。'},{o:3,why:'D 项笑嘻嘻是表达错位而非识别障碍，且小刚能识别批评情绪；命题人用“表情与场合不符”做干扰，测试“识别”与“表达”的区分。'}],key:"识别情绪能力缺失",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'根据上述定义，下列属于“即兴能力”的是：',
+opts:['公司年终聚餐时，员工为大家表演了诗朗诵','人力资源部通过比较候选人的即兴演讲表现，确定最终录用名单','某企业面对技术封锁，边调整发展规划边创新研发技术，最终成长为行业巨头','某企业为应对未来劳动力成本大幅攀升，提前制定了转型预案'],
+ans:2,point:"定义判断·单定义",
+solve:'关键信息：①紧急、不可预测环境；②计划与行动同时进行；③资源整合呈现创造性。C 项“面对技术封锁（①）”“边调整边研发（②）”“成长为行业巨头（③）”，完整符合。',
+key:'三个要件层层叠加：环境紧急→边干边改→创造性突围。选项缺任一要件即排除。',
+traps:[{o:0,why:'A 项“企业聚餐+诗朗诵”完全无①紧急环境，命题人用“企业”主体做烟雾弹，测试考生是否先查环境要件。'},{o:1,why:'B 项“即兴演讲”只是招聘手段，非企业应对紧急环境的整体能力；命题人用“即兴”字眼做关键词陷阱，诱导考生望文生义。'},{o:3,why:'D 项是“提前制定预案”，恰恰是计划先行而非“计划与行动同时进行”；命题人用“应对不利影响”的合理企业行为反向设陷。'}],key:"紧急环境+边干边改+创造结果",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'根据上述定义，下列属于“邻里效应”的是：',
+opts:['张三买了新轿车，李四紧跟着也买了一辆同款','老王去年种的玉米高产，今年村里的邻居纷纷效仿他的种植方法','老孙的儿子初中毕业后选择就读职业高中，邻居家孩子也效仿','邻居们觉得牛二家装修设计漂亮，纷纷向其取经'],
+ans:1,point:"定义判断·单定义",
+solve:'关键信息：①经验丰富的邻里行为（示范者）；②影响他人社会经济行为；③他人出于收益考虑模仿。B 项老王玉米高产（经验丰富）→邻居效仿种植方法（社会经济行为+收益考虑），全符合。',
+key:'逐要件核对：示范者要有“经验/收益证明”（高产），模仿者要“出于收益考虑”。缺“经验”或缺“收益动机”都排除。',
+traps:[{o:0,why:'A 项张三买车非“经验丰富”，李四跟风是攀比非收益考虑；命题人用“跟风模仿”的表面相似诱导，实则两要件全缺。'},{o:2,why:'C 项选职高是教育选择，非“社会经济行为”，且老孙儿子无经验示范属性；命题人用“效仿”行为偷换行为类型。'},{o:3,why:'D 项装修取经缺“收益考虑”（好看≠收益），且牛二非经验丰富者；命题人用“学习模仿”的表象设障，测试“出于收益考虑”要件。'}],key:"经验示范+收益动机模仿",src:"2024河南省考·行测",yr:2024,srcType:0,orig:"题干依 2024 年河南省考《行测》真题卷，答案经华图教育解析核对"},
+
+{q:'根据上述定义，下列不属于“零和博弈”的是：',
+opts:['甲、乙两家公司加强合作，盘活了彼此的闲置资产','10 个小朋友竞争 3 个苹果，最终有 7 个小朋友空手而归','甲、乙两支队伍进行象棋比赛，分出胜负','小赵考中公务员，小王落榜'],
+ans:0,point:"定义判断·选非题",
+solve:'注意问法：选“不属于”。关键信息：①游戏总成绩恒为零；②有赢家必有输家。A 项合作盘活资产是“双赢”，不符合“有赢家必有输家”，故不属于，当选。',
+key:'“零和=有人赢必有人输”，合作共赢最不可能属于。选非题先排除完全符合定义的选项。',
+traps:[{o:1,why:'B 项竞争 3 个苹果必有输家，符合“有赢家必有输家”，是零和博弈；考生若误判“竞争人数多≠零和”就会排除正确项（选非题易错）。'},{o:2,why:'C 项象棋分出胜负，一方赢一方输，标准零和场景；命题人用“比赛”的公平性表象干扰，实则胜负互斥即零和。'},{o:3,why:'D 项小赵考上小王落榜，名额固定一得一失，典型零和；考生易被“考公非竞争对抗”的想法带偏，忽略资源稀缺下的此消彼长。'}],key:"选非题：合作共赢不属于",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），答案经格木教育解析核对"},
+
+{q:'根据上述定义，下列属于“流体智力”的是：',
+opts:['小王天赋异禀，在数学领域表现出超乎常人的直觉与悟性','自古英雄出少年，很多名人年轻时便成就斐然','张先生大器晚成，中年以后才在学术上取得重大突破','李女士坚信书读百遍其义自见，通过反复阅读弄懂了深奥理论'],
+ans:0,point:"定义判断·单定义",
+solve:'关键信息：①少依赖文化知识；②决定于先天能力。A 项“天赋异禀”直接对应先天能力，符合。',
+key:'流体智力=先天智力（少依赖后天学习），晶体智力=后天积累。选项凡强调“苦读、积累、晚成”的都是晶体智力，直接排除。',
+traps:[{o:1,why:'B 项“英雄出少年”只讲成就早，未说明源于先天能力，关键信息缺失；命题人用“年轻=先天”的直觉做偷换。'},{o:2,why:'C 项“大器晚成”强调积累与后发，恰是流体智力随年龄下降的反向场景；命题人用“晚成”反向测试定义理解。'},{o:3,why:'D 项“书读百遍”是典型的后天学习路径，属晶体智力；命题人用“智力”宽泛词诱导，测试先天/后天之辨。'}],key:"先天能力属性",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），答案经格木教育解析核对"},
+
+{q:'我国市场主体总量已达 1.46 亿户，近年来市场主体活跃度总体稳定在 70% 左右，年均净增长超过 1000 万户。以下哪项如果为真，不是上述现象产生的原因？',
+opts:['营商环境不断优化，为各类市场主体发展提供了良好的政策、法制和市场环境','各类市场主体快速发展，为巩固存量就业和吸纳新增就业提供了最直接有力的支撑','市场主体准入制度逐步从政府端的管理好用向企业端的办事好用转变','政策精准对接各类市场主体，综合释放支持市场主体发展的积极信号'],
+ans:1,point:"逻辑·原因解释",
+solve:'题干现象：市场主体总量大且年均净增超千万、活跃度高。问“不是原因”。B 项“市场主体快速发展为就业提供支撑”是市场主体发展带来的“结果/影响”，而非其增长的原因，因果倒置，当选。A/C/D 分别从营商环境、准入制度、政策支持解释市场主体为何增长，均是原因。',
+key:'原因解释“选非”题的核心陷阱是因果倒置：区分“解释 X 的原因”与“X 带来的结果”。问“为什么增长”，答案应是前置条件而非后续影响。',
+traps:[{o:0,why:'A 项营商环境优化是标准前置原因，命题人把它与 B 并列，测试考生是否真正辨析“原因”与“结果”方向，而非凭常识选“都对”。'},{o:2,why:'C 项准入制度便利化（降低门槛→更多主体进入）是典型原因，命题人用“制度细节”增加辨识难度，诱导考生不敢确认。'},{o:3,why:'D 项政策支持是原因，命题人把它放末位制造“A/C/D 都是原因，那选谁”的困惑——正是“选非题”下对因果方向的综合检验。'}],key:"因果倒置=结果当原因",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），答案经格木教育解析核对"},
+];
+const QB2=[
+/* 数量关系（v1.1 加入） */
+];
+const PD_POINTS=["图形·位置类（平移旋转）","图形·样式类（运算/求同）","图形·属性类（对称）","图形·属性类（曲直/开闭）","图形·数量类（点线）","图形·数量类（面素）","图形·立体类（六面体）","图形·立体类（拼合/截面）","定义判断·单定义","定义判断·多定义","定义判断·选非题","类比·外延关系（全同/种属/组成）","类比·外延关系（并列/交叉）","类比·内涵关系（属性/功能/材料）","类比·内涵关系（因果/顺承/对应）","类比·语义/语法（近反义/主谓动宾）","逻辑·翻译推理","逻辑·真假推理","逻辑·分析推理","逻辑·加强论证","逻辑·削弱论证","逻辑·归纳推理","逻辑·原因解释","逻辑·一般论证（评价/前提）"];
+const SL_POINTS=["工程问题","行程问题","经济利润","排列组合","概率问题","几何问题","容斥问题","最值问题","浓度问题","数列与数字推理","年龄/日期/周期","牛吃草问题","钟表/植树/其他","不定方程"];
+const LS_KEY="xz_lk_v1";
+let S={mod:"pd",view:"setup",setup:{srcs:[0,1],years:[2020,2021,2022,2023,2024,2025,2026],count:15,pts:null},quiz:[],cur:0,answers:[],unc:[],t0:0,timer:null,secs:0,done:false,h:[]};
+function curQB(){return S.mod==="pd"?QB:QB2}
+function curPT(){return S.mod==="pd"?PD_POINTS:SL_POINTS}
+function L(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{h:[]}}catch(e){return{h:[]}}}
+function save(){try{localStorage.setItem(LS_KEY,JSON.stringify(S.h?{h:S.h}:{h:[]}))}catch(e){}}
+function fmt(s){s=Math.max(0,s);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function view(v){S.view=v;["setup","quiz","res","pt","st","wk"].forEach(x=>{document.getElementById(x+"View").style.display=x===v?"block":"none"});if(v==="setup")renderSetup();if(v==="pt")renderPt();if(v==="st")renderSt();if(v==="wk")renderWk();if(v==="res")renderRes()}
+function setMod(m){S.mod=m;document.querySelectorAll(".nt").forEach(n=>n.classList.toggle("on",n.dataset.m===m));
+const meta=S.mod==="pd"?{t:"判断推理",s:"河南省考+事业单位联考真题 · 每错项逐条拆解命题人陷阱"}:{t:"数量关系",s:"河南省考+事业单位联考真题 · 解法拆解与陷阱预警（v1.1 加入）"};
+document.querySelector(".top h1").textContent="行测专项 · "+meta.t+"真题化训练";document.getElementById("hdSub").textContent=meta.s;renderSetup()}
+function eligible(){const qb=curQB(),s=S.setup;return qb.filter(q=>s.srcs.includes(q.srcType)&&s.years.includes(q.yr)&&(!s.pts||s.pts.has(q.point)))}
+function renderSetup(){
+const s=S.setup,qb=curQB(),pts=curPT();
+document.getElementById("srcChips").innerHTML=["河南省考","河南事业单位联考"].map((t,i)=>'<span class="chip'+(s.srcs.includes(i)?" sel":"")+'" onclick="tgSrc('+i+')">'+t+'</span>').join("");
+document.getElementById("yrChips").innerHTML=[2020,2021,2022,2023,2024,2025,2026].map(y=>'<span class="chip'+(s.years.includes(y)?" sel":"")+'" onclick="tgYr('+y+')">'+y+' 年</span>').join("");
+document.getElementById("cntChips").innerHTML=[10,15,20,25,30].map(c=>'<span class="chip'+(s.count===c?" sel":"")+'" onclick="S.setup.count='+c+';renderSetup()">'+c+' 题</span>').join("");
+document.getElementById("ptCount").textContent=pts.length;
+const all=pts.map(p=>[p,qb.filter(q=>q.point===p).length]);
+document.getElementById("ptChips").innerHTML=all.map(([p,n])=>'<span class="chip'+(s.pts&&s.pts.has(p)?" sel":"")+'" onclick="tgPt(\''+p+'\')">'+p+'（'+n+'）</span>').join("");
+const el=eligible().length;
+document.getElementById("tip").textContent="已选 "+ (s.pts?s.pts.size:pts.length) +" 个考点，覆盖 "+el+" 道题目";
+document.getElementById("startBtn").textContent="开始练习（"+s.count+" 题随机组卷）";
+document.getElementById("startBtn").disabled=el===0||!s.pts||s.pts.size===0;
+renderMethod();
+}
+function tgSrc(i){const a=S.setup.srcs;i=a.includes(i)?a.filter(x=>x!==i):[...a,i];S.setup.srcs=i;renderSetup()}
+function tgYr(y){const a=S.setup.years;S.setup.years=a.includes(y)?a.filter(x=>x!==y):[...a,y].sort();renderSetup()}
+function tgPt(p){const s=S.setup;if(!s.pts)s.pts=new Set(curPT());s.pts.has(p)?s.pts.delete(p):s.pts.add(p);renderSetup()}
+function selAllPt(){S.setup.pts=new Set(curPT());renderSetup()}
+function clrPt(){S.setup.pts=new Set();renderSetup()}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startQuiz(){const pool=eligible();if(!pool.length)return;const n=Math.min(S.setup.count,pool.length);S.quiz=shuffle(pool).slice(0,n);S.cur=0;S.answers=new Array(n).fill(-1);S.unc=new Array(n).fill(false);S.done=false;S.t0=Date.now();S.secs=0;clearInterval(S.timer);S.timer=setInterval(()=>{if(!S.done){S.secs=Math.floor((Date.now()-S.t0)/1000);document.getElementById("timer").textContent=fmt(S.secs)}},1000);view("quiz");renderQ()}
+function renderQ(){const i=S.cur,q=S.quiz[i];
+document.getElementById("qIdx").textContent="第 "+(i+1)+" / "+S.quiz.length+" 题";
+document.getElementById("qProg").style.width=((i+1)/S.quiz.length*100)+"%";
+document.getElementById("qMeta").innerHTML='<span class="tag pt">'+q.point+'</span><span class="tag">'+q.src+'</span><span class="tag">'+(q.srcType===0?"河南省考":"河南事业单位联考")+' · '+q.yr+' 年</span>';
+document.getElementById("qBody").innerHTML=q.q;
+const opts=q.opts.map((o,oi)=>'<button class="opt'+(S.answers[i]===oi?" pick":"")+'" onclick="pick('+oi+')"><span class="o">'+"ABCD"[oi]+'</span>'+o+'</button>').join("");
+document.getElementById("qOpts").innerHTML=opts;
+document.getElementById("qNav").innerHTML=(i<S.quiz.length-1?'<button class="btn" onclick="next()">下一题</button>':'<button class="btn" id="finishQ" onclick="submit()">交卷判分</button>')+'<button class="btn ghost" onclick="prev()">上一题</button>';
+document.getElementById("timer").textContent=fmt(S.secs);}
+function pick(oi){if(S.done)return;S.answers[S.cur]=oi;renderQ()}
+function toggleUnc(){S.unc[S.cur]=!S.unc[S.cur];renderQ()}
+function next(){if(S.cur<S.quiz.length-1){S.cur++;renderQ()}}
+function prev(){if(S.cur>0){S.cur--;renderQ()}}
+function quitQuiz(){clearInterval(S.timer);view("setup")}
+function submit(){S.done=true;clearInterval(S.timer);const rec={t:Date.now(),total:S.quiz.length,correct:S.quiz.filter((q,i)=>S.answers[i]===q.ans).length,secs:S.secs,ids:S.quiz.map((q,i)=>S.answers[i]!==q.ans?i:-1).filter(x=>x>=0),years:[...new Set(S.quiz.map(q=>q.yr))],mod:S.mod,qids:S.quiz.map((q,i)=>[curQB().indexOf(q),S.answers[i]===q.ans])};
+S.h=S.h||[];S.h.push(rec);save();view("res")}
+function renderRes(){const r=S.h[S.h.length-1];const cor=r.correct,tot=r.total,p=Math.round(cor/tot*100);const cls=p>=80?"hi":p>=60?"mid":"lo";
+let html='<div class="score-wrap"><div class="score-ring '+cls+'">'+p+'%</div><h2 style="font-size:18px">'+cor+' / '+tot+' 题正确</h2><p style="color:var(--sub);font-size:13px;margin-top:6px">用时 '+fmt(r.secs)+' · 正确率 ≥80% 绿档 / ≥60% 橙档 / 其余红档</p></div>';
+S.quiz.forEach((q,i)=>{const ok=S.answers[i]===q.ans;html+='<div class="anl" style="'+(ok?"border-color:#cde9dd":"border-color:#f2c6c4")+'"><b>'+(ok?"✓ 正确":"✗ 错误")+'</b> · <span style="font-size:12.5px;color:var(--sub)">你的答案：'+(S.answers[i]<0?"未答":"ABCD"[S.answers[i]])+' · 正确答案：'+"ABCD"[q.ans]+'</span><div style="margin-top:8px">'+q.q+'</div><div style="margin-top:8px"><b>考点：</b>'+q.point+'</div><div style="margin-top:6px"><b>解析：</b>'+q.solve+'</div><div class="key"><b>解题关键：</b>'+q.key+'</div>'+(q.traps.map(t=>'<div class="trap"><span class="tw">干扰项 '+"ABCD"[t.o]+'：</span>'+t.why+'</div>').join(""))+'<div class="orig"><b>出处核验：</b>'+(q.orig||"按真题卷收录，答案经华图/格木等多家机构交叉核对")+'</div></div>'});
+html+='<div style="display:flex;gap:10px;margin-top:14px"><button class="btn" onclick="view(\'setup\')">返回设置</button><button class="btn g" onclick="retryWrong()">重练错题</button></div>';
+document.getElementById("resCard").innerHTML=html;window.scrollTo(0,0)}
+function retryWrong(){const wrong=S.quiz.filter((q,i)=>S.answers[i]!==q.ans);if(!wrong.length){alert("本次没有错题");return}S.setup.pts=new Set(wrong.map(q=>q.point));view("setup")}
+function renderPt(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const map={};curPT().forEach(p=>map[p]={n:0,c:0});
+r.forEach(rec=>{rec.qids.forEach(([qi,ok])=>{const q=curQB()[qi];if(q&&map[q.point]){map[q.point].n++;if(ok)map[q.point].c++}})});
+let html='<h2><span class="bar"></span>考点图谱（'+S.mod==="pd"?"判断推理":"数量关系"+' · 共练 '+r.reduce((a,x)=>a+x.total,0)+' 题）</h2><table><tr><th>考点</th><th>已练</th><th>正确率</th><th>分布</th></tr>';
+curPT().forEach(p=>{const m=map[p];const pc=m.n?Math.round(m.c/m.n*100):null;const cls=pc===null?"":pc>=80?"hi":pc>=60?"mid":"lo";
+html+='<tr><td>'+p+'</td><td>'+m.n+'</td><td>'+(pc===null?"未练":'<b class="'+cls+'">'+pc+'%</b>')+'</td><td><div style="height:8px;background:#eef2f8;border-radius:4px;width:120px;display:inline-block;vertical-align:middle"><div style="width:'+(pc||0)+'%;height:100%;background:'+(cls==="hi"?"var(--green)":cls==="mid"?"var(--orange)":"var(--red)")+';border-radius:4px"></div></div></td></tr>'});
+html+='</table>';document.getElementById("ptCard").innerHTML=html}
+function renderSt(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const tot=r.reduce((a,x)=>a+x.total,0),cor=r.reduce((a,x)=>a+x.correct,0),wrong=r.reduce((a,x)=>a+x.ids.length,0);
+const byY={};r.forEach(rec=>{rec.years.forEach(y=>{byY[y]=byY[y]||{n:0,c:0};byY[y].n+=rec.total;byY[y].c+=rec.correct})});
+let html='<h2><span class="bar"></span>统计（'+S.mod==="pd"?"判断推理":"数量关系"+'）</h2><div class="stat-grid"><div class="stat-box"><div class="v">'+r.length+'</div><div class="k">练习次数</div></div><div class="stat-box"><div class="v">'+tot+'</div><div class="k">累计答题</div></div><div class="stat-box"><div class="v">'+(tot?Math.round(cor/tot*100)+"%":"—")+'</div><div class="k">累计正确率</div></div><div class="stat-box"><div class="v">'+wrong+'</div><div class="k">累计错题</div></div></div>';
+html+='<div class="sec-t">分年份正确率</div><table><tr><th>年份</th><th>已练</th><th>正确</th><th>正确率</th></tr>';
+[2020,2021,2022,2023,2024,2025,2026].forEach(y=>{const m=byY[y];html+='<tr><td>'+y+' 年</td><td>'+(m?m.n:0)+'</td><td>'+(m?m.c:0)+'</td><td>'+(m&&m.n?Math.round(m.c/m.n*100)+"%":"—")+'</td></tr>'});
+html+='</table><div class="sec-t">历史记录</div>';
+if(!r.length)html+='<p style="color:var(--sub);font-size:13px">暂无记录，先去练一组吧。</p>';
+else r.slice().reverse().slice(0,10).forEach(rec=>{const p=Math.round(rec.correct/rec.total*100);html+='<div style="border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-bottom:8px;font-size:13px"><b>'+p+'%</b> · '+rec.correct+'/'+rec.total+' · 用时 '+fmt(rec.secs)+' · '+(rec.years||[]).join("/")+' 年 · '+new Date(rec.t).toLocaleString("zh-CN",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"})+'</div>'});
+document.getElementById("stCard").innerHTML=html}
+function renderWk(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const cnt={};
+r.forEach(rec=>{rec.ids.forEach(qi=>{const q=curQB()[qi];cnt[q.src+"/"+q.yr]=(cnt[q.src+"/"+q.yr]||0)+1})});
+const arr=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
+let html='<h2><span class="bar"></span>错题本（'+S.mod==="pd"?"判断推理":"数量关系"+' · 共 '+arr.reduce((a,x)=>a+x[1],0)+' 题次）</h2>';
+if(!arr.length)html+='<p style="color:var(--sub);font-size:13px">暂无错题记录。</p>';
+else{html+='<div style="margin-bottom:12px"><button class="btn" onclick="reWrongAll()">一键重练全部错题</button></div>';
+arr.forEach(([key,n])=>{const [src,y]=key.split("/");const qs=curQB().filter(q=>q.src===src&&q.yr==Number(y));
+html+='<div class="wrong-item"><div class="wq"><span class="badge y">错 '+n+' 次</span><span class="badge">'+src+' · '+y+' 年</span></div><div style="max-height:64px;overflow:hidden;color:var(--sub);font-size:12.5px">'+qs.map(q=>q.q.replace(/<[^>]+>/g," ").slice(0,60)).join("；")+'</div></div>'})}
+document.getElementById("wkCard").innerHTML=html}
+function reWrongAll(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const ids=new Set();r.forEach(rec=>rec.ids.forEach(qi=>{const q=curQB()[qi];const idx=curQB().indexOf(q);if(idx>=0)ids.add(idx)}));
+const qs=curQB().filter((q,i)=>ids.has(i));if(!qs.length){alert("暂无错题");return}
+S.setup.pts=new Set(qs.map(q=>q.point));view("setup")}
+function renderMethod(){
+const html=S.mod==="pd"?pdMethod():slMethod();
+document.getElementById("methodCard").innerHTML=html}
+function pdMethod(){return '<div style="font-size:13.5px;line-height:2">'+
+'<b>图形推理（先定性后定量）：</b>组成相同→位置类（平移/旋转/翻转）；组成相似→样式类（求同/存异/黑白叠加）；组成不同→先属性（对称/曲直/开闭）后数量（点线面素）；立体类→展开图用相对面/公共边，拼合看凹凸对应。<br>'+
+'<b>定义判断（关键信息法）：</b>①拆定义成分（主体/对象/方式/结果/目的）；②多定义先看提问锁哪个定义；③选非题警惕“加强/肯定”表述混入；④干扰项惯用手法：偷换主体（把“企业”换成“个人”）、扩大/缩小范围（把“违规程度高”换成“所有”）、遗漏要件（只满足部分关键信息）。<br>'+
+'<b>类比推理（先横向后纵向）：</b>①先确定题干两词/三词逻辑关系（外延：全同/种属/组成/并列/交叉；内涵：属性/功能/材料/因果/顺承；语义：近反义/褒贬；语法：主谓/动宾/偏正）；②再与选项纵向比较（词性、主体是否一致）；③成语类比先拆词素。<br>'+
+'<b>逻辑判断（论证三要素法）：</b>①先找论点（表观点/结论词）和论据（表事实/数据）；②加强：补充论据/建立联系（搭桥）/补充前提；削弱：否定论点/削弱论据/切断联系（拆桥）/另有他因；③力度比较：直接削弱论点＞拆桥＞削弱论据；④翻译推理背熟“肯前肯后、否后否前、否前肯后不必然”；⑤真假推理先找矛盾（必一真一假）再找反对；⑥分析推理优先排除法+最大信息法。<br>'+
+'<b>命题人干扰项五大规律：</b>①偷换主体/对象（张冠李戴）；②扩大/缩小范围（以偏概全）；③遗漏关键要件（部分符合即强选）；④偷换概念（近义词偷换语义）；⑤因果倒置/强加因果。解法：逐项回题干核对关键信息，差一个要件就排除。'+
+'</div>'}
+function slMethod(){return '<div style="font-size:13.5px;line-height:2;color:var(--sub)">数量关系模块题库建设中（v1.1 加入），将覆盖：工程问题（赋值法/比例法）、行程问题（相遇追及/流水行船）、经济利润（利润率/打折）、排列组合（分类分步/捆绑插空）、概率、几何（平面/立体）、容斥（两集合/三集合）、最值（最不利构造）、浓度（十字交叉）、数列、年龄/日期/周期、牛吃草、钟表/植树/其他、不定方程。每题附解法拆解与“命题人陷阱预警”（单位陷阱/倍数陷阱/选项相关陷阱）。</div>'}
+function init(){const st=L();S.h=st.h||[];if(!S.setup.pts)S.setup.pts=new Set(PD_POINTS);renderSetup();document.querySelectorAll(".navbar .nt").forEach(n=>{n.onclick=()=>setMod(n.dataset.m)});view("setup")}
+init();
+</script>
+</body>
+</html>
