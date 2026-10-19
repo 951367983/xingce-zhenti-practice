@@ -586,7 +586,7 @@ function L(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{h:[]}}catch(e
 function save(){try{localStorage.setItem(LS_KEY,JSON.stringify(S.h?{h:S.h}:{h:[]}))}catch(e){}}
 function fmt(s){s=Math.max(0,s);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
 function view(v){S.view=v;["setup","quiz","res","pt","st","wk"].forEach(x=>{document.getElementById(x+"View").style.display=x===v?"block":"none"});if(v==="setup")renderSetup();if(v==="pt")renderPt();if(v==="st")renderSt();if(v==="wk")renderWk();if(v==="res")renderRes()}
-function setMod(m){S.mod=m;document.querySelectorAll(".nt").forEach(n=>n.classList.toggle("on",n.dataset.m===m));
+function setMod(m){S.mod=m;S.setup.pts=new Set(curPT());document.querySelectorAll(".nt").forEach(n=>n.classList.toggle("on",n.dataset.m===m));
 const meta=S.mod==="pd"?{t:"判断推理",s:"河南省考+事业单位联考真题 · 每错项逐条拆解命题人陷阱"}:{t:"数量关系",s:"河南省考+事业单位联考真题 · 每错项拆解命题人陷阱"};
 document.querySelector(".top h1").textContent="行测专项 · "+meta.t+"真题化训练";document.getElementById("hdSub").textContent=meta.s;renderSetup()}
 function eligible(){const qb=curQB(),s=S.setup;return qb.filter(q=>s.srcs.includes(q.srcType)&&s.years.includes(q.yr)&&(!s.pts||s.pts.has(q.point)))}
