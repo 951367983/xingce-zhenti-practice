@@ -658,7 +658,7 @@ function view(v){S.view=v;["setup","quiz","res","pt","st","wk"].forEach(x=>{docu
 function setMod(m){S.mod=m;S.setup.pts=new Set(curPT());document.querySelectorAll(".nt").forEach(n=>n.classList.toggle("on",n.dataset.m===m));
 let meta={t:"判断推理",s:"河南省考+事业单位联考真题 · 每错项逐条拆解命题人陷阱"};
 if(S.mod==="sl")meta={t:"数量关系",s:"河南省考+事业单位联考真题 · 每错项拆解命题人陷阱"};
-if(S.mod==="zl")meta={t:"资料分析",s:"河南省考真题 · 图表依解析卷重建 · 每错项拆解命题人陷阱"};
+if(S.mod==="zl")meta={t:"资料分析",s:"河南省考+国考/联考真题 · 表格/柱状/饼图/文字四类材料 · 每错项拆解命题人陷阱"};
 if(S.mod==="yy")meta={t:"言语理解",s:"2021-2026国考真题 · 每题3个干扰项逐条拆解命题人陷阱 · 附出处核验"};
 document.querySelector(".top h1").textContent="行测专项 · "+meta.t+"真题化训练";document.getElementById("hdSub").textContent=meta.s;renderSetup()}
 function eligible(){const qb=curQB(),s=S.setup;return qb.filter(q=>s.srcs.includes(q.srcType)&&s.years.includes(q.yr)&&(!s.pts||s.pts.has(q.point)))}
