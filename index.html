@@ -732,9 +732,9 @@ document.getElementById("wkCard").innerHTML=html}
 function reWrongAll(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const ids=new Set();r.forEach(rec=>rec.ids.forEach(qi=>{const q=curQB()[qi];const idx=curQB().indexOf(q);if(idx>=0)ids.add(idx)}));
 const qs=curQB().filter((q,i)=>ids.has(i));if(!qs.length){alert("暂无错题");return}
 S.setup.pts=new Set(qs.map(q=>q.point));view("setup")}
-function modName(){return S.mod==="pd"?"判断推理":S.mod==="sl"?"数量关系":"资料分析"}
+function modName(){return S.mod==="pd"?"判断推理":(S.mod==="sl"?"数量关系":(S.mod==="zl"?"资料分析":"言语理解"))}
 function renderMethod(){
-const html=S.mod==="pd"?pdMethod():(S.mod==="sl"?slMethod():zlMethod());
+const html=S.mod==="pd"?pdMethod():(S.mod==="sl"?slMethod():(S.mod==="zl"?zlMethod():yyMethod()));
 document.getElementById("methodCard").innerHTML=html}
 function pdMethod(){return '<div style="font-size:13.5px;line-height:2">'+
 '<b>图形推理（先定性后定量）：</b>组成相同→位置类（平移/旋转/翻转）；组成相似→样式类（求同/存异/黑白叠加）；组成不同→先属性（对称/曲直/开闭）后数量（点线面素）；立体类→展开图用相对面/公共边，拼合看凹凸对应。<br>'+
@@ -745,6 +745,7 @@ function pdMethod(){return '<div style="font-size:13.5px;line-height:2">'+
 '</div>'}
 function slMethod(){return '<div style="font-size:13.5px;line-height:2;color:var(--sub)"><b>核心速算：</b>十字交叉法（溶液/平均）、n+1 增量原则、赋值法与比例法（工程/行程）、整除特性（不定方程）、捆绑插空（排列组合）、逆向思维（概率）、最不利构造（最值）。<b>命题人高频陷阱：</b>单位换算（万/亿）、“至少…保证”（最不利+1）、比例与数值偷换、选项相关陷阱（正确答案常为错误选项的修正值）。每题附解法拆解与陷阱预警。</div>'}
 function zlMethod(){return '<div style="font-size:13.5px;line-height:2;color:var(--sub)"><b>核心速算：</b>增长率=（现期-基期）÷基期；增长量 n+1 原则；基期量=现期÷（1+r）；基期比重=现期比重×（1+整体增速）÷（1+部分增速）；平均数增长率=（a-b）÷（1+b）。<b>命题人高频陷阱：</b>“百分点”≠“增长率”；现期量≠基期量；部分增速快于整体→基期比重更低；增量与增速偷换；缺首期数据不可推“逐年”。每题附出处核验与错误选项逐条拆解。</div>'}
+function yyMethod(){return '<div style="font-size:13.5px;line-height:2;color:var(--sub)"><b>逻辑填空（语境优先）：</b>先找提示词——转折（但/却/反而→取反义）、并列（和/也/同时→近义或反义）、递进（甚至/更→程度加深）、因果（因为/所以/可见→推结果）；再用词义锁定——近义干扰看侧重点（“退避三舍”本义是主动退让，并无畏惧义）、感情色彩（褒/贬/中性错位）、语义轻重（“束手无策”语义过重）、搭配对象（“比例”只能配主导/优势，不配关键/核心）。<b>多空题命题人惯用手法：</b>“半对”陷阱——前两空都成立、第三空错位（如“返璞归真”≠守住本和源），必须全匹配才选；还有“字面同构”干扰——用“此/彼”“防线”等字面近形词诱导，须回归本义。<b>片段阅读（细节判断六类偷换）：</b>偷换概念/时态/数量/范围/逻辑/主体——逐项回原文比对关键词，选项表述与原文一字之差即排除。<b>语句衔接与排序：</b>承上启下（话题一致）、指代衔接（这/那指代前文）、首句判断（下定义/背景引入）、捆绑对（关联词/重复词）。<b>典型误区：</b>凭语感不看对应、只看单空忽略整句、把近义词当同义词直接排除、被“看着顺眼”的强干扰项带偏。</div>'}
 function init(){const st=L();S.h=st.h||[];if(!S.setup.pts)S.setup.pts=new Set(PD_POINTS);renderSetup();document.querySelectorAll(".navbar .nt").forEach(n=>{n.onclick=()=>setMod(n.dataset.m)});view("setup")}
 init();
 </script>
