@@ -119,6 +119,14 @@ th{background:#f2f6fb;color:#3a4a5c}
     <h2><span class="bar"></span>命题人视角 · 判断推理干扰项设计规律（做题前必读）</h2>
     <div id="methodCard"></div>
   </div>
+  <div class="card">
+    <h2><span class="bar"></span>学习统计</h2>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn" onclick="view('st')">按年份统计</button>
+      <button class="btn" onclick="view('pt')">考点图谱</button>
+      <button class="btn" onclick="view('wk')">错题本</button>
+    </div>
+  </div>
 </div>
 
 <div class="wrap" id="quizView" style="display:none">
@@ -651,18 +659,18 @@ S.h=S.h||[];S.h.push(rec);save();view("res")}
 function renderRes(){const r=S.h[S.h.length-1];const cor=r.correct,tot=r.total,p=Math.round(cor/tot*100);const cls=p>=80?"hi":p>=60?"mid":"lo";
 let html='<div class="score-wrap"><div class="score-ring '+cls+'">'+p+'%</div><h2 style="font-size:18px">'+cor+' / '+tot+' 题正确</h2><p style="color:var(--sub);font-size:13px;margin-top:6px">用时 '+fmt(r.secs)+' · 正确率 ≥80% 绿档 / ≥60% 橙档 / 其余红档</p></div>';
 S.quiz.forEach((q,i)=>{const ok=S.answers[i]===q.ans;html+='<div class="anl" style="'+(ok?"border-color:#cde9dd":"border-color:#f2c6c4")+'"><b>'+(ok?"✓ 正确":"✗ 错误")+'</b> · <span style="font-size:12.5px;color:var(--sub)">你的答案：'+(S.answers[i]<0?"未答":"ABCD"[S.answers[i]])+' · 正确答案：'+"ABCD"[q.ans]+'</span><div style="margin-top:8px">'+q.q+'</div><div style="margin-top:8px"><b>考点：</b>'+q.point+'</div><div style="margin-top:6px"><b>解析：</b>'+q.solve+'</div><div class="key"><b>解题关键：</b>'+q.key+'</div>'+(q.traps.map(t=>'<div class="trap"><span class="tw">干扰项 '+"ABCD"[t.o]+'：</span>'+t.why+'</div>').join(""))+'<div class="orig"><b>出处核验：</b>'+(q.orig||"按真题卷收录，答案经华图/格木等多家机构交叉核对")+'</div></div>'});
-html+='<div style="display:flex;gap:10px;margin-top:14px"><button class="btn" onclick="view(\'setup\')">返回设置</button><button class="btn g" onclick="retryWrong()">重练错题</button></div>';
+html+='<div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap"><button class="btn" onclick="view(\'setup\')">返回设置</button><button class="btn g" onclick="retryWrong()">重练错题</button><button class="btn" onclick="view(\'st\')">统计</button><button class="btn" onclick="view(\'pt\')">考点图谱</button><button class="btn" onclick="view(\'wk\')">错题本</button></div>';
 document.getElementById("resCard").innerHTML=html;window.scrollTo(0,0)}
 function retryWrong(){const wrong=S.quiz.filter((q,i)=>S.answers[i]!==q.ans);if(!wrong.length){alert("本次没有错题");return}S.setup.pts=new Set(wrong.map(q=>q.point));view("setup")}
 function renderPt(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const map={};curPT().forEach(p=>map[p]={n:0,c:0});
 r.forEach(rec=>{rec.qids.forEach(([qi,ok])=>{const q=curQB()[qi];if(q&&map[q.point]){map[q.point].n++;if(ok)map[q.point].c++}})});
-let html='<h2><span class="bar"></span>考点图谱（'+S.mod==="pd"?"判断推理":"数量关系"+' · 共练 '+r.reduce((a,x)=>a+x.total,0)+' 题）</h2><table><tr><th>考点</th><th>已练</th><th>正确率</th><th>分布</th></tr>';
+let html='<h2><span class="bar"></span>考点图谱（'+modName()+' · 共练 '+r.reduce((a,x)=>a+x.total,0)+' 题）</h2><table><tr><th>考点</th><th>已练</th><th>正确率</th><th>分布</th></tr>';
 curPT().forEach(p=>{const m=map[p];const pc=m.n?Math.round(m.c/m.n*100):null;const cls=pc===null?"":pc>=80?"hi":pc>=60?"mid":"lo";
 html+='<tr><td>'+p+'</td><td>'+m.n+'</td><td>'+(pc===null?"未练":'<b class="'+cls+'">'+pc+'%</b>')+'</td><td><div style="height:8px;background:#eef2f8;border-radius:4px;width:120px;display:inline-block;vertical-align:middle"><div style="width:'+(pc||0)+'%;height:100%;background:'+(cls==="hi"?"var(--green)":cls==="mid"?"var(--orange)":"var(--red)")+';border-radius:4px"></div></div></td></tr>'});
 html+='</table>';document.getElementById("ptCard").innerHTML=html}
 function renderSt(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const tot=r.reduce((a,x)=>a+x.total,0),cor=r.reduce((a,x)=>a+x.correct,0),wrong=r.reduce((a,x)=>a+x.ids.length,0);
 const byY={};r.forEach(rec=>{rec.years.forEach(y=>{byY[y]=byY[y]||{n:0,c:0};byY[y].n+=rec.total;byY[y].c+=rec.correct})});
-let html='<h2><span class="bar"></span>统计（'+S.mod==="pd"?"判断推理":"数量关系"+'）</h2><div class="stat-grid"><div class="stat-box"><div class="v">'+r.length+'</div><div class="k">练习次数</div></div><div class="stat-box"><div class="v">'+tot+'</div><div class="k">累计答题</div></div><div class="stat-box"><div class="v">'+(tot?Math.round(cor/tot*100)+"%":"—")+'</div><div class="k">累计正确率</div></div><div class="stat-box"><div class="v">'+wrong+'</div><div class="k">累计错题</div></div></div>';
+let html='<h2><span class="bar"></span>统计（'+modName()+'）</h2><div class="stat-grid"><div class="stat-box"><div class="v">'+r.length+'</div><div class="k">练习次数</div></div><div class="stat-box"><div class="v">'+tot+'</div><div class="k">累计答题</div></div><div class="stat-box"><div class="v">'+(tot?Math.round(cor/tot*100)+"%":"—")+'</div><div class="k">累计正确率</div></div><div class="stat-box"><div class="v">'+wrong+'</div><div class="k">累计错题</div></div></div>';
 html+='<div class="sec-t">分年份正确率</div><table><tr><th>年份</th><th>已练</th><th>正确</th><th>正确率</th></tr>';
 [2020,2021,2022,2023,2024,2025,2026].forEach(y=>{const m=byY[y];html+='<tr><td>'+y+' 年</td><td>'+(m?m.n:0)+'</td><td>'+(m?m.c:0)+'</td><td>'+(m&&m.n?Math.round(m.c/m.n*100)+"%":"—")+'</td></tr>'});
 html+='</table><div class="sec-t">历史记录</div>';
@@ -672,7 +680,7 @@ document.getElementById("stCard").innerHTML=html}
 function renderWk(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const cnt={};
 r.forEach(rec=>{rec.ids.forEach(qi=>{const q=curQB()[qi];cnt[q.src+"/"+q.yr]=(cnt[q.src+"/"+q.yr]||0)+1})});
 const arr=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
-let html='<h2><span class="bar"></span>错题本（'+S.mod==="pd"?"判断推理":"数量关系"+' · 共 '+arr.reduce((a,x)=>a+x[1],0)+' 题次）</h2>';
+let html='<h2><span class="bar"></span>错题本（'+modName()+' · 共 '+arr.reduce((a,x)=>a+x[1],0)+' 题次）</h2>';
 if(!arr.length)html+='<p style="color:var(--sub);font-size:13px">暂无错题记录。</p>';
 else{html+='<div style="margin-bottom:12px"><button class="btn" onclick="reWrongAll()">一键重练全部错题</button></div>';
 arr.forEach(([key,n])=>{const [src,y]=key.split("/");const qs=curQB().filter(q=>q.src===src&&q.yr==Number(y));
@@ -681,8 +689,9 @@ document.getElementById("wkCard").innerHTML=html}
 function reWrongAll(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const ids=new Set();r.forEach(rec=>rec.ids.forEach(qi=>{const q=curQB()[qi];const idx=curQB().indexOf(q);if(idx>=0)ids.add(idx)}));
 const qs=curQB().filter((q,i)=>ids.has(i));if(!qs.length){alert("暂无错题");return}
 S.setup.pts=new Set(qs.map(q=>q.point));view("setup")}
+function modName(){return S.mod==="pd"?"判断推理":S.mod==="sl"?"数量关系":"资料分析"}
 function renderMethod(){
-const html=S.mod==="pd"?pdMethod():slMethod();
+const html=S.mod==="pd"?pdMethod():(S.mod==="sl"?slMethod():zlMethod());
 document.getElementById("methodCard").innerHTML=html}
 function pdMethod(){return '<div style="font-size:13.5px;line-height:2">'+
 '<b>图形推理（先定性后定量）：</b>组成相同→位置类（平移/旋转/翻转）；组成相似→样式类（求同/存异/黑白叠加）；组成不同→先属性（对称/曲直/开闭）后数量（点线面素）；立体类→展开图用相对面/公共边，拼合看凹凸对应。<br>'+
@@ -691,7 +700,8 @@ function pdMethod(){return '<div style="font-size:13.5px;line-height:2">'+
 '<b>逻辑判断（论证三要素法）：</b>①先找论点（表观点/结论词）和论据（表事实/数据）；②加强：补充论据/建立联系（搭桥）/补充前提；削弱：否定论点/削弱论据/切断联系（拆桥）/另有他因；③力度比较：直接削弱论点＞拆桥＞削弱论据；④翻译推理背熟“肯前肯后、否后否前、否前肯后不必然”；⑤真假推理先找矛盾（必一真一假）再找反对；⑥分析推理优先排除法+最大信息法。<br>'+
 '<b>命题人干扰项五大规律：</b>①偷换主体/对象（张冠李戴）；②扩大/缩小范围（以偏概全）；③遗漏关键要件（部分符合即强选）；④偷换概念（近义词偷换语义）；⑤因果倒置/强加因果。解法：逐项回题干核对关键信息，差一个要件就排除。'+
 '</div>'}
-function slMethod(){return '<div style="font-size:13.5px;line-height:2;color:var(--sub)">数量关系模块题库建设中（v1.1 加入），将覆盖：工程问题（赋值法/比例法）、行程问题（相遇追及/流水行船）、经济利润（利润率/打折）、排列组合（分类分步/捆绑插空）、概率、几何（平面/立体）、容斥（两集合/三集合）、最值（最不利构造）、浓度（十字交叉）、数列、年龄/日期/周期、牛吃草、钟表/植树/其他、不定方程。每题附解法拆解与“命题人陷阱预警”（单位陷阱/倍数陷阱/选项相关陷阱）。</div>'}
+function slMethod(){return '<div style="font-size:13.5px;line-height:2;color:var(--sub)"><b>核心速算：</b>十字交叉法（溶液/平均）、n+1 增量原则、赋值法与比例法（工程/行程）、整除特性（不定方程）、捆绑插空（排列组合）、逆向思维（概率）、最不利构造（最值）。<b>命题人高频陷阱：</b>单位换算（万/亿）、“至少…保证”（最不利+1）、比例与数值偷换、选项相关陷阱（正确答案常为错误选项的修正值）。每题附解法拆解与陷阱预警。</div>'}
+function zlMethod(){return '<div style="font-size:13.5px;line-height:2;color:var(--sub)"><b>核心速算：</b>增长率=（现期-基期）÷基期；增长量 n+1 原则；基期量=现期÷（1+r）；基期比重=现期比重×（1+整体增速）÷（1+部分增速）；平均数增长率=（a-b）÷（1+b）。<b>命题人高频陷阱：</b>“百分点”≠“增长率”；现期量≠基期量；部分增速快于整体→基期比重更低；增量与增速偷换；缺首期数据不可推“逐年”。每题附出处核验与错误选项逐条拆解。</div>'}
 function init(){const st=L();S.h=st.h||[];if(!S.setup.pts)S.setup.pts=new Set(PD_POINTS);renderSetup();document.querySelectorAll(".navbar .nt").forEach(n=>{n.onclick=()=>setMod(n.dataset.m)});view("setup")}
 init();
 </script>
