@@ -660,7 +660,8 @@ let meta={t:"判断推理",s:"河南省考+事业单位联考真题 · 每错项
 if(S.mod==="sl")meta={t:"数量关系",s:"河南省考+事业单位联考真题 · 每错项拆解命题人陷阱"};
 if(S.mod==="zl")meta={t:"资料分析",s:"河南省考+国考/联考真题 · 表格/柱状/饼图/文字四类材料 · 每错项拆解命题人陷阱"};
 if(S.mod==="yy")meta={t:"言语理解",s:"2021-2026国考真题 · 每题3个干扰项逐条拆解命题人陷阱 · 附出处核验"};
-document.querySelector(".top h1").textContent="行测专项 · "+meta.t+"真题化训练";document.getElementById("hdSub").textContent=meta.s;renderSetup()}
+document.querySelector(".top h1").textContent="行测专项 · "+meta.t+"真题化训练";document.getElementById("hdSub").textContent=meta.s;
+if(S.view==="st")renderSt();else if(S.view==="pt")renderPt();else if(S.view==="wk")renderWk();else view("setup")}
 function eligible(){const qb=curQB(),s=S.setup;return qb.filter(q=>s.srcs.includes(q.srcType)&&s.years.includes(q.yr)&&(!s.pts||s.pts.has(q.point)))}
 function renderSetup(){
 const s=S.setup,qb=curQB(),pts=curPT();
@@ -710,15 +711,16 @@ r.forEach(rec=>{rec.qids.forEach(([qi,ok])=>{const q=curQB()[qi];if(q&&map[q.poi
 let html='<h2><span class="bar"></span>考点图谱（'+modName()+' · 共练 '+r.reduce((a,x)=>a+x.total,0)+' 题）</h2><table><tr><th>考点</th><th>已练</th><th>正确率</th><th>分布</th></tr>';
 curPT().forEach(p=>{const m=map[p];const pc=m.n?Math.round(m.c/m.n*100):null;const cls=pc===null?"":pc>=80?"hi":pc>=60?"mid":"lo";
 html+='<tr><td>'+p+'</td><td>'+m.n+'</td><td>'+(pc===null?"未练":'<b class="'+cls+'">'+pc+'%</b>')+'</td><td><div style="height:8px;background:#eef2f8;border-radius:4px;width:120px;display:inline-block;vertical-align:middle"><div style="width:'+(pc||0)+'%;height:100%;background:'+(cls==="hi"?"var(--green)":cls==="mid"?"var(--orange)":"var(--red)")+';border-radius:4px"></div></div></td></tr>'});
-html+='</table>';document.getElementById("ptCard").innerHTML=html}
+html+='</table><div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap"><button class="btn" onclick="view(\'setup\')">返回设置</button><button class="btn g" onclick="view(\'st\')">按年份统计</button><button class="btn g" onclick="view(\'wk\')">错题本</button></div>';document.getElementById("ptCard").innerHTML=html}
 function renderSt(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const tot=r.reduce((a,x)=>a+x.total,0),cor=r.reduce((a,x)=>a+x.correct,0),wrong=r.reduce((a,x)=>a+x.ids.length,0);
 const byY={};r.forEach(rec=>{rec.years.forEach(y=>{byY[y]=byY[y]||{n:0,c:0};byY[y].n+=rec.total;byY[y].c+=rec.correct})});
 let html='<h2><span class="bar"></span>统计（'+modName()+'）</h2><div class="stat-grid"><div class="stat-box"><div class="v">'+r.length+'</div><div class="k">练习次数</div></div><div class="stat-box"><div class="v">'+tot+'</div><div class="k">累计答题</div></div><div class="stat-box"><div class="v">'+(tot?Math.round(cor/tot*100)+"%":"—")+'</div><div class="k">累计正确率</div></div><div class="stat-box"><div class="v">'+wrong+'</div><div class="k">累计错题</div></div></div>';
 html+='<div class="sec-t">分年份正确率</div><table><tr><th>年份</th><th>已练</th><th>正确</th><th>正确率</th></tr>';
-[2020,2021,2022,2023,2024,2025,2026].forEach(y=>{const m=byY[y];html+='<tr><td>'+y+' 年</td><td>'+(m?m.n:0)+'</td><td>'+(m?m.c:0)+'</td><td>'+(m&&m.n?Math.round(m.c/m.n*100)+"%":"—")+'</td></tr>'});
+[2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026].forEach(y=>{const m=byY[y];html+='<tr><td>'+y+' 年</td><td>'+(m?m.n:0)+'</td><td>'+(m?m.c:0)+'</td><td>'+(m&&m.n?Math.round(m.c/m.n*100)+"%":"—")+'</td></tr>'});
 html+='</table><div class="sec-t">历史记录</div>';
 if(!r.length)html+='<p style="color:var(--sub);font-size:13px">暂无记录，先去练一组吧。</p>';
 else r.slice().reverse().slice(0,10).forEach(rec=>{const p=Math.round(rec.correct/rec.total*100);html+='<div style="border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-bottom:8px;font-size:13px"><b>'+p+'%</b> · '+rec.correct+'/'+rec.total+' · 用时 '+fmt(rec.secs)+' · '+(rec.years||[]).join("/")+' 年 · '+new Date(rec.t).toLocaleString("zh-CN",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"})+'</div>'});
+html+='<div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap"><button class="btn" onclick="view(\'setup\')">返回设置</button><button class="btn g" onclick="view(\'pt\')">考点图谱</button><button class="btn g" onclick="view(\'wk\')">错题本</button></div>';
 document.getElementById("stCard").innerHTML=html}
 function renderWk(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const cnt={};
 r.forEach(rec=>{rec.ids.forEach(qi=>{const q=curQB()[qi];cnt[q.src+"/"+q.yr]=(cnt[q.src+"/"+q.yr]||0)+1})});
@@ -728,6 +730,7 @@ if(!arr.length)html+='<p style="color:var(--sub);font-size:13px">暂无错题记
 else{html+='<div style="margin-bottom:12px"><button class="btn" onclick="reWrongAll()">一键重练全部错题</button></div>';
 arr.forEach(([key,n])=>{const [src,y]=key.split("/");const qs=curQB().filter(q=>q.src===src&&q.yr==Number(y));
 html+='<div class="wrong-item"><div class="wq"><span class="badge y">错 '+n+' 次</span><span class="badge">'+src+' · '+y+' 年</span></div><div style="max-height:64px;overflow:hidden;color:var(--sub);font-size:12.5px">'+qs.map(q=>q.q.replace(/<[^>]+>/g," ").slice(0,60)).join("；")+'</div></div>'})}
+html+='<div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap"><button class="btn" onclick="view(\'setup\')">返回设置</button><button class="btn g" onclick="view(\'st\')">按年份统计</button><button class="btn g" onclick="view(\'pt\')">考点图谱</button></div>';
 document.getElementById("wkCard").innerHTML=html}
 function reWrongAll(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const ids=new Set();r.forEach(rec=>rec.ids.forEach(qi=>{const q=curQB()[qi];const idx=curQB().indexOf(q);if(idx>=0)ids.add(idx)}));
 const qs=curQB().filter((q,i)=>ids.has(i));if(!qs.length){alert("暂无错题");return}
