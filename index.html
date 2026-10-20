@@ -75,6 +75,8 @@ th{background:#f2f6fb;color:#3a4a5c}
 .wrong-item{border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px;background:#fff}
 .wrong-item .wq{font-size:13.5px;margin-bottom:6px}
 .wrong-item .wr{font-size:12.5px;color:var(--sub)}
+.wrong-item .wk-tip{float:right;font-size:12px;color:var(--blue);font-weight:400}
+.wrong-item .wk-detail .badge{background:var(--blue-weak,#e8f0fe);color:var(--blue);padding:2px 8px;border-radius:6px;font-size:12px}
 .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;background:#e7f0fe;color:var(--blue);margin-right:6px}
 .badge.y{background:#fff3e0;color:#b26a00}
 .badge.g{background:#eafaf3;color:#1c6b48}
@@ -177,7 +179,7 @@ solve:'两段式：第一组 B→E→H 按字母表间隔 2 个字母（B、E、
 key:'字母图形题双解法锁定：字母间隔（主规律）+ 交点数量递减（验证规律），两条规律指向同一答案时基本可确定。',
 traps:[{o:1,why:'P 与 L 之间隔 3 个字母、与 O 相邻，选 P 是只看“字母越来越靠后”而忽视固定间隔，属“规律识别不全”陷阱。'},{o:2,why:'Q 更靠后，诱使考生认为“继续按字母表顺序走”，实则第二组起点 L 与第一组起点 B 位置不同，按顺序走就错——典型的“机械类比、忽视组间差异”干扰。'},{o:3,why:'R 与 Q 同理强化“顺延字母表”的错误路径；同时 R 含 1 个交点，若按交点规律也无法满足 0 交点，双线出局。'}],key:"字母间隔（间隔2个）+交点数为0",src:"2024河南事业单位联考·职测",yr:2024,srcType:1,orig:"题干依 2024 年河南事业单位联考《职业能力测验》真题卷（网友回忆版），答案经格木教育解析核对"},
 
-{q:'从所给的四个选项中，选择最合适的一个填入问号处，使之呈现一定的规律性：<div class="fig"><div style="text-align:center"><div>题干（第一组）</div><div style="display:flex;gap:12px;justify-content:center"><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">奋</text></svg><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">战</text></svg><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">占</text></svg></div></div><div style="text-align:center;margin-top:6px">题干（第二组）</div><div style="display:flex;gap:12px;justify-content:center"><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">会</text></svg><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">坛</text></svg><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">?</text></svg></div></div><div style="text-align:center;margin-top:6px">选项</div><div style="display:flex;gap:10px;justify-content:center"><svg width="60" height="40" viewBox="0 0 60 40"><text x="0" y="30" font-size="30" font-family="SimSun">运</text></svg><svg width="60" height="40" viewBox="0 0 60 40"><text x="0" y="30" font-size="30" font-family="SimSun">动</text></svg><svg width="60" height="40" viewBox="0 0 60 40"><text x="0" y="30" font-size="30" font-family="SimSun">芸</text></svg><svg width="60" height="40" viewBox="0 0 60 40"><text x="0" y="30" font-size="30" font-family="SimSun">尝</text></svg></div></div>',
+{q:'从所给的四个选项中，选择最合适的一个填入问号处，使之呈现一定的规律性：<div class="fig"><div style="text-align:center"><div>题干（第一组）</div><div style="display:flex;gap:12px;justify-content:center"><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">奋</text></svg><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">战</text></svg><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">占</text></svg></div></div><div style="text-align:center;margin-top:6px">题干（第二组）</div><div style="display:flex;gap:12px;justify-content:center"><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">会</text></svg><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">坛</text></svg><svg width="70" height="40" viewBox="0 0 70 40"><text x="0" y="30" font-size="30" font-family="SimSun">?</text></svg></div></div><div style="text-align:center;margin-top:6px">选项</div><div style="display:flex;gap:10px;justify-content:center"><svg width="60" height="40" viewBox="0 0 60 40"><text x="0" y="30" font-size="30" font-family="SimSun">运</text></svg><svg width="60" height="40" viewBox="0 0 60 40"><text x="0" y="30" font-size="30" font-family="SimSun">动</text></svg><svg width="60" height="40" viewBox="0 0 60 40"><text x="0" y="30" font-size="30" font-family="SimSun">芸</text></svg><svg width="60" height="40" viewBox="0 0 60 40"><text x="0" y="30" font-size="30" font-family="SimSun">尝</text></svg></div>',
 opts:['<div style="text-align:center">运</div>','<div style="text-align:center">动</div>','<div style="text-align:center">芸</div>','<div style="text-align:center">尝</div>'],
 ans:2,point:"图形·样式类（运算/求同）",
 solve:'两段式汉字求同：第一组“奋、战、占”均含共同部件“占”；第二组“会、坛、？”应均含共同部件“云”，四个选项中只有“芸”含“云”。',
@@ -722,19 +724,25 @@ if(!r.length)html+='<p style="color:var(--sub);font-size:13px">暂无记录，�
 else r.slice().reverse().slice(0,10).forEach(rec=>{const p=Math.round(rec.correct/rec.total*100);html+='<div style="border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-bottom:8px;font-size:13px"><b>'+p+'%</b> · '+rec.correct+'/'+rec.total+' · 用时 '+fmt(rec.secs)+' · '+(rec.years||[]).join("/")+' 年 · '+new Date(rec.t).toLocaleString("zh-CN",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"})+'</div>'});
 html+='<div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap"><button class="btn" onclick="view(\'setup\')">返回设置</button><button class="btn g" onclick="view(\'pt\')">考点图谱</button><button class="btn g" onclick="view(\'wk\')">错题本</button></div>';
 document.getElementById("stCard").innerHTML=html}
-function renderWk(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const cnt={};
-r.forEach(rec=>{rec.ids.forEach(qi=>{const q=curQB()[qi];cnt[q.src+"/"+q.yr]=(cnt[q.src+"/"+q.yr]||0)+1})});
-const arr=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
-let html='<h2><span class="bar"></span>错题本（'+modName()+' · 共 '+arr.reduce((a,x)=>a+x[1],0)+' 题次）</h2>';
+function renderWk(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const groups={};
+r.forEach(rec=>{(rec.qids||[]).forEach(([idx,ok])=>{if(ok)return;const q=curQB()[idx];if(!q)return;const key=q.src+"/"+q.yr;groups[key]=groups[key]||{n:0,set:{}};groups[key].n++;groups[key].set[idx]=1})});
+const arr=Object.entries(groups).sort((a,b)=>b[1].n-a[1].n);
+let html='<h2><span class="bar"></span>错题本（'+modName()+' · 共 '+arr.reduce((a,x)=>a+x[1].n,0)+' 题次）</h2>';
 if(!arr.length)html+='<p style="color:var(--sub);font-size:13px">暂无错题记录。</p>';
 else{html+='<div style="margin-bottom:12px"><button class="btn" onclick="reWrongAll()">一键重练全部错题</button></div>';
-arr.forEach(([key,n])=>{const [src,y]=key.split("/");const qs=curQB().filter(q=>q.src===src&&q.yr==Number(y));
-html+='<div class="wrong-item"><div class="wq"><span class="badge y">错 '+n+' 次</span><span class="badge">'+src+' · '+y+' 年</span></div><div style="max-height:64px;overflow:hidden;color:var(--sub);font-size:12.5px">'+qs.map(q=>q.q.replace(/<[^>]+>/g," ").slice(0,60)).join("；")+'</div></div>'})}
+arr.forEach(([key,g])=>{const [src,y]=key.split("/");const idxs=Object.keys(g.set).map(Number);const qs=idxs.map(i=>curQB()[i]).filter(Boolean);
+html+='<div class="wrong-item" style="cursor:pointer" onclick="toggleWk(this)"><div class="wq"><span class="badge y">错 '+g.n+' 次</span><span class="badge">'+src+' · '+y+' 年</span><span class="wk-tip">点击展开/收起</span></div><div class="wr">'+qs.map(q=>q.q.replace(/<[^>]+>/g," ").slice(0,50)).join("；")+'…</div><div class="wk-detail" style="display:none;margin-top:8px">'+
+qs.map((q,qi)=>{const idx=idxs[qi];return '<div style="border-top:1px dashed var(--line);padding:8px 0;font-size:13px"><div>'+q.q+'</div><div style="margin-top:6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="badge">'+q.point+'</span><span class="badge">答案 '+"ABCD"[q.ans]+'</span><button class="btn" style="padding:4px 10px;font-size:12px" onclick="event.stopPropagation();retryOne('+idx+')">重练此题</button></div></div>'} ).join("")+
+'<div style="margin-top:8px"><button class="btn g" style="padding:6px 12px;font-size:12.5px" onclick="event.stopPropagation();retryGroup(['+idxs.join(",")+'])">重练本组全部</button></div></div></div>'})}
 html+='<div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap"><button class="btn" onclick="view(\'setup\')">返回设置</button><button class="btn g" onclick="view(\'st\')">按年份统计</button><button class="btn g" onclick="view(\'pt\')">考点图谱</button></div>';
 document.getElementById("wkCard").innerHTML=html}
-function reWrongAll(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const ids=new Set();r.forEach(rec=>rec.ids.forEach(qi=>{const q=curQB()[qi];const idx=curQB().indexOf(q);if(idx>=0)ids.add(idx)}));
+function reWrongAll(){const r=(S.h||[]).filter(x=>x.mod===S.mod);const ids=new Set();r.forEach(rec=>{(rec.qids||[]).forEach(([idx,ok])=>{if(!ok)ids.add(idx)})});
 const qs=curQB().filter((q,i)=>ids.has(i));if(!qs.length){alert("暂无错题");return}
-S.setup.pts=new Set(qs.map(q=>q.point));view("setup")}
+startThese(qs)}
+function toggleWk(el){const d=el.querySelector(".wk-detail");if(!d)return;d.style.display=d.style.display==="none"?"block":"none"}
+function startThese(qs){if(!qs.length)return;clearInterval(S.timer);S.quiz=qs;S.cur=0;S.answers=new Array(qs.length).fill(-1);S.unc=new Array(qs.length).fill(false);S.done=false;S.t0=Date.now();S.secs=0;S.timer=setInterval(()=>{if(!S.done){S.secs=Math.floor((Date.now()-S.t0)/1000);document.getElementById("timer").textContent=fmt(S.secs)}},1000);view("quiz");renderQ()}
+function retryOne(idx){const q=curQB()[idx];if(!q)return;startThese([q])}
+function retryGroup(ids){startThese(ids.map(i=>curQB()[i]).filter(Boolean))}
 function modName(){return S.mod==="pd"?"判断推理":(S.mod==="sl"?"数量关系":(S.mod==="zl"?"资料分析":"言语理解"))}
 function renderMethod(){
 const html=S.mod==="pd"?pdMethod():(S.mod==="sl"?slMethod():(S.mod==="zl"?zlMethod():yyMethod()));
